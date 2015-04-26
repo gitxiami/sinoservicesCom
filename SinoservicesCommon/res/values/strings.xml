@@ -4,5 +4,12 @@
     <string name="app_name">SinoservicesCommon</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    
+    
+    <string name="main_bottom_tv1_str">消息</string>
+    <string name="main_bottom_tv2_str">通信录</string>
+    <string name="main_bottom_tv3_str">应用</string>
+    <string name="main_bottom_tv4_str">发现</string>
 
 </resources>

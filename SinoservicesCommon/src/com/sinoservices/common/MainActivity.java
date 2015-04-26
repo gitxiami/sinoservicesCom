@@ -8,6 +8,7 @@ import com.sinoservices.common.fragment.ContactFragment;
 import com.sinoservices.common.fragment.MessageFragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements
@@ -37,6 +39,13 @@ public class MainActivity extends FragmentActivity implements
 	private LinearLayout main_ly_tab3;
 	private LinearLayout main_ly_tab4;
 
+	private TextView main_bottom_tab1_tv = null;
+	private TextView main_bottom_tab2_tv = null;
+	private TextView main_bottom_tab3_tv = null;
+	private TextView main_bottom_tab4_tv = null;
+
+	private TextView main_title_bar_tv;
+	
 	private boolean is_closed = false;
 	private long mExitTime;
 	private Button leftMenu;
@@ -52,16 +61,16 @@ public class MainActivity extends FragmentActivity implements
 		setUpMenu();
 		changeFragment(new MessageFragment());
 		setListener();
-
+		selectIndex(1);
 	}
-
 	private void setUpMenu() {
 		leftMenu = (Button) findViewById(R.id.title_bar_left_menu);
 		main_ly_tab1 = (LinearLayout) findViewById(R.id.main_ly_tab1);
 		main_ly_tab2 = (LinearLayout) findViewById(R.id.main_ly_tab2);
 		main_ly_tab3 = (LinearLayout) findViewById(R.id.main_ly_tab3);
 		main_ly_tab4 = (LinearLayout) findViewById(R.id.main_ly_tab4);
-
+		//标题文字
+		main_title_bar_tv = (TextView) findViewById(R.id.main_title_bar_tv);
 		// attach to current activity;
 		resideMenu = new ResideMenu(this);
 		resideMenu.setBackground(R.drawable.menu_background);
@@ -127,24 +136,91 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View view) {
-
 		if (view.getId() == R.id.main_ly_tab1) {
-			changeFragment(new MessageFragment());
-			// Toast.makeText(MainActivity.this, "大哥，别再点我了", 0).show();
+			//消息页面
+			selectIndex(1);
 		} else if (view.getId() == R.id.main_ly_tab2) {
-			changeFragment(new ContactFragment());
-			// Toast.makeText(MainActivity.this, "大姐，别再点我了", 0).show();
+			//通信录页面
+			selectIndex(2);
 		} else if (view.getId() == R.id.main_ly_tab3) {
-			// changeFragment(new DongtaiFragment());
-			Toast.makeText(MainActivity.this, "大妈，别再点我了", 0).show();
+			//应用页面
+			selectIndex(3);
 		} else if (view.getId() == R.id.main_ly_tab4) {
-			// changeFragment(new DongtaiFragment());
-			// Toast.makeText(MainActivity.this, "阿姨，别再点我了", 0).show();
+			//发现页面
+			selectIndex(4);
+		}
+	}
+
+	/**
+	 * 根据索引值切换到不同的页面
+	 * 
+	 * @param i
+	 *            索引项
+	 */
+	private void selectIndex(int i) {
+		setTabBgNormal();
+		switch (i) {
+		case 1:
+			//消息页面
+			main_title_bar_tv.setText(getResources().getString(R.string.main_bottom_tv1_str));
+			findViewById(R.id.main_bottom_tab1_iv_bg).setBackgroundResource(
+					R.drawable.main_bottom_tab1_select);
+			main_bottom_tab1_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_select_bg_color));
+			changeFragment(new MessageFragment());
+			break;
+		case 2:
+			//通信录页面
+			main_title_bar_tv.setText(getResources().getString(R.string.main_bottom_tv2_str));
+			findViewById(R.id.main_bottom_tab2_iv_bg).setBackgroundResource(
+					R.drawable.main_bottom_tab2_select);
+			main_bottom_tab2_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_select_bg_color));
+			changeFragment(new ContactFragment());
+			
+			break;
+		case 3:
+			//应用页面
+			main_title_bar_tv.setText(getResources().getString(R.string.main_bottom_tv3_str));
+			findViewById(R.id.main_bottom_tab3_iv_bg).setBackgroundResource(
+					R.drawable.main_bottom_tab3_select);
+			main_bottom_tab3_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_select_bg_color));
+			break;
+		case 4:
+			//发现页面
+			main_title_bar_tv.setText(getResources().getString(R.string.main_bottom_tv4_str));
+			findViewById(R.id.main_bottom_tab4_iv_bg).setBackgroundResource(
+					R.drawable.main_bottom_tab4_select);
+			main_bottom_tab4_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_select_bg_color));
 			Intent intent = new Intent(MainActivity.this,
 					AssistantActivity.class);
 			startActivity(intent);
 			pullInAnimation();
+			break;
+		default:
+			break;
 		}
+	}
+	/** 都设置为默认没选中的背景 **/
+	private void setTabBgNormal() {
+		findViewById(R.id.main_bottom_tab1_iv_bg).setBackgroundResource(
+				R.drawable.main_bottom_tab1_normal);
+		findViewById(R.id.main_bottom_tab2_iv_bg).setBackgroundResource(
+				R.drawable.main_bottom_tab2_normal);
+		findViewById(R.id.main_bottom_tab3_iv_bg).setBackgroundResource(
+				R.drawable.main_bottom_tab3_normal);
+		findViewById(R.id.main_bottom_tab4_iv_bg).setBackgroundResource(
+				R.drawable.main_bottom_tab4_normal);
+		if (main_bottom_tab1_tv == null && main_bottom_tab2_tv == null
+				&& main_bottom_tab3_tv == null && main_bottom_tab4_tv == null) {
+			main_bottom_tab1_tv = (TextView) findViewById(R.id.main_bottom_tab1_tv);
+			main_bottom_tab2_tv = (TextView) findViewById(R.id.main_bottom_tab2_tv);
+			main_bottom_tab3_tv = (TextView) findViewById(R.id.main_bottom_tab3_tv);
+			main_bottom_tab4_tv = (TextView) findViewById(R.id.main_bottom_tab4_tv);			
+		}
+		main_bottom_tab1_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_bg_color));
+		main_bottom_tab2_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_bg_color));
+		main_bottom_tab3_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_bg_color));
+		main_bottom_tab4_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_bg_color));
+		
 	}
 
 	/** 切换Fragment **/

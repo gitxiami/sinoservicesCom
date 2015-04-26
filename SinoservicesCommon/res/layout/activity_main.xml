@@ -25,6 +25,7 @@
                 android:background="@drawable/icon_profile" />
 
             <TextView
+                android:id="@+id/main_title_bar_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -113,15 +114,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab1_iv_bg"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/main_bottom_iv_height_width"
+                    android:layout_height="@dimen/main_bottom_iv_height_width"
                     android:background="@drawable/main_bottom_tab1_normal" />
 
                 <TextView
+                    android:id="@+id/main_bottom_tab1_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="消息"
-                    android:textColor="#A4A4A6"
+                    android:text="@string/main_bottom_tv1_str"
+                    android:textColor="@color/main_bottom_tv_bg_color"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -135,15 +137,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab2_iv_bg"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/main_bottom_iv_height_width"
+                    android:layout_height="@dimen/main_bottom_iv_height_width"
                     android:background="@drawable/main_bottom_tab2_normal" />
 
                 <TextView
+                    android:id="@+id/main_bottom_tab2_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="通信录"
-                    android:textColor="#A4A4A6"
+                    android:text="@string/main_bottom_tv2_str"
+                    android:textColor="@color/main_bottom_tv_bg_color"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -157,15 +160,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab3_iv_bg"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/main_bottom_iv_height_width"
+                    android:layout_height="@dimen/main_bottom_iv_height_width"
                     android:background="@drawable/main_bottom_tab3_normal" />
 
                 <TextView
+                    android:id="@+id/main_bottom_tab3_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="应用"
-                    android:textColor="#A4A4A6"
+                    android:text="@string/main_bottom_tv3_str"
+                    android:textColor="@color/main_bottom_tv_bg_color"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -179,15 +183,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab4_iv_bg"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/main_bottom_iv_height_width"
+                    android:layout_height="@dimen/main_bottom_iv_height_width"
                     android:background="@drawable/main_bottom_tab4_normal" />
 
                 <TextView
+                    android:id="@+id/main_bottom_tab4_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发现"
-                    android:textColor="#A4A4A6"
+                    android:text="@string/main_bottom_tv4_str"
+                    android:textColor="@color/main_bottom_tv_bg_color"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>

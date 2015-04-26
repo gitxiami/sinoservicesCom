@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="title_bar_bg_color">#0289DF</color>
+    <color name="main_bottom_tv_bg_color">#A4A4A6</color>
+        <color name="main_bottom_tv_select_bg_color">#45C01A</color>
 </resources>

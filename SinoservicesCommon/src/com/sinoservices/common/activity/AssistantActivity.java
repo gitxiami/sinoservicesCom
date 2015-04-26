@@ -3,10 +3,12 @@ package com.sinoservices.common.activity;
 import com.sinoservices.common.BaseActivity;
 import com.sinoservices.common.R;
 import com.sinoservices.common.view.TitleBar;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
@@ -61,6 +63,15 @@ public class AssistantActivity extends BaseActivity {
 		content_container.addView(view, new LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT));
-
+     
+		titleBar.getLeft_container().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// 返回按钮事件
+				finish();
+			}
+		});
 	}
+	
+
 }
