@@ -6,8 +6,8 @@
     <RelativeLayout
         android:id="@+id/title_bar_contain"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#0C7EA3" >
+        android:layout_height="55dp"
+        android:background="#0289DF" >
 
         <FrameLayout
             android:layout_width="match_parent"

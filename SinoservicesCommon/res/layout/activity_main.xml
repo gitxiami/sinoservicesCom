@@ -68,8 +68,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:hint="搜索" 
-                android:background="#ffffff"/>
+                android:background="#ffffff"
+                android:hint="搜索" />
 
             <ImageView
                 android:layout_width="28dp"
@@ -83,14 +83,14 @@
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="65dp"
         android:orientation="vertical" >
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="-70dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="-65dp"
         android:orientation="vertical" >
 
         <View
@@ -113,15 +113,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab1_iv_bg"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/main_bottom_tab1_normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="消息"
-                    android:textSize="15sp" />
+                    android:textColor="#A4A4A6"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,15 +135,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab2_iv_bg"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/main_bottom_tab2_normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="通信录"
-                    android:textSize="15sp" />
+                    android:textColor="#A4A4A6"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -155,15 +157,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab3_iv_bg"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/main_bottom_tab3_normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="应用"
-                    android:textSize="15sp" />
+                    android:textColor="#A4A4A6"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -176,15 +179,16 @@
 
                 <ImageView
                     android:id="@+id/main_bottom_tab4_iv_bg"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:background="@drawable/main_bottom_tab4_normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="发现"
-                    android:textSize="15sp" />
+                    android:textColor="#A4A4A6"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

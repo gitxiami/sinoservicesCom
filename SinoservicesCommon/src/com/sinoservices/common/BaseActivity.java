@@ -1,7 +1,6 @@
 package com.sinoservices.common;
 
 import com.sinoservices.common.view.TitleBar;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,5 +50,12 @@ public class BaseActivity extends Activity {
 	public RelativeLayout getContent_container() {
 		return content_container;
 	}
-	
+	/**activityÇÐ»»¶¯»­,½ø**/
+	public void pullInAnimation(){
+		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+	}
+	/**activityÇÐ»»¶¯»­£¬ÍË**/
+	public void pullOutAnimation(){
+		overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in);
+	}
 }

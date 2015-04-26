@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.sinoservices.common.BaseActivity"></activity>
+        <activity android:name="com.sinoservices.common.activity.AssistantActivity"></activity>
     </application>
 
 </manifest>

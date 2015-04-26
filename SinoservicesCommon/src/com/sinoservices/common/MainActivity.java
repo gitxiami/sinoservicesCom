@@ -3,6 +3,11 @@ package com.sinoservices.common;
 import com.sinoservices.common.ResideMenu.ResideMenu;
 import com.sinoservices.common.ResideMenu.ResideMenuInfo;
 import com.sinoservices.common.ResideMenu.ResideMenuItem;
+import com.sinoservices.common.activity.AssistantActivity;
+import com.sinoservices.common.fragment.ContactFragment;
+import com.sinoservices.common.fragment.MessageFragment;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -45,9 +50,9 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 
 		setUpMenu();
-
+		changeFragment(new MessageFragment());
 		setListener();
-		
+
 	}
 
 	private void setUpMenu() {
@@ -69,10 +74,14 @@ public class MainActivity extends FragmentActivity implements
 		resideMenu.setDirectionDisable(ResideMenu.DIRECTION_RIGHT);
 
 		// create menu items;
-		itemDaiban = new ResideMenuItem(this, R.drawable.residmenu_itme1_bg, "我的待办");
-		itemRiCheng = new ResideMenuItem(this, R.drawable.residmenu_itme2_bg, "我的日程");
-		itemMail = new ResideMenuItem(this, R.drawable.residmenu_itme3_bg, "我的邮件");
-		itemContact = new ResideMenuItem(this, R.drawable.residmenu_itme4_bg, "我的联系人");
+		itemDaiban = new ResideMenuItem(this, R.drawable.residmenu_itme1_bg,
+				"我的待办");
+		itemRiCheng = new ResideMenuItem(this, R.drawable.residmenu_itme2_bg,
+				"我的日程");
+		itemMail = new ResideMenuItem(this, R.drawable.residmenu_itme3_bg,
+				"我的邮件");
+		itemContact = new ResideMenuItem(this, R.drawable.residmenu_itme4_bg,
+				"我的联系人");
 
 		resideMenu.addMenuItem(itemDaiban, ResideMenu.DIRECTION_LEFT);
 		resideMenu.addMenuItem(itemRiCheng, ResideMenu.DIRECTION_LEFT);
@@ -87,7 +96,7 @@ public class MainActivity extends FragmentActivity implements
 		main_ly_tab2.setOnClickListener(this);
 		main_ly_tab3.setOnClickListener(this);
 		main_ly_tab4.setOnClickListener(this);
-		
+
 		resideMenu.addMenuInfo(info);
 		itemDaiban.setOnClickListener(this);
 		itemRiCheng.setOnClickListener(this);
@@ -120,17 +129,21 @@ public class MainActivity extends FragmentActivity implements
 	public void onClick(View view) {
 
 		if (view.getId() == R.id.main_ly_tab1) {
-			// changeFragment(new NewsFragment());
-			Toast.makeText(MainActivity.this, "大哥，别再点我了", 0).show();
+			changeFragment(new MessageFragment());
+			// Toast.makeText(MainActivity.this, "大哥，别再点我了", 0).show();
 		} else if (view.getId() == R.id.main_ly_tab2) {
-			// changeFragment(new ContactsFragment());
-			Toast.makeText(MainActivity.this, "大姐，别再点我了", 0).show();
+			changeFragment(new ContactFragment());
+			// Toast.makeText(MainActivity.this, "大姐，别再点我了", 0).show();
 		} else if (view.getId() == R.id.main_ly_tab3) {
 			// changeFragment(new DongtaiFragment());
 			Toast.makeText(MainActivity.this, "大妈，别再点我了", 0).show();
 		} else if (view.getId() == R.id.main_ly_tab4) {
 			// changeFragment(new DongtaiFragment());
-			Toast.makeText(MainActivity.this, "阿姨，别再点我了", 0).show();
+			// Toast.makeText(MainActivity.this, "阿姨，别再点我了", 0).show();
+			Intent intent = new Intent(MainActivity.this,
+					AssistantActivity.class);
+			startActivity(intent);
+			pullInAnimation();
 		}
 	}
 
@@ -174,5 +187,15 @@ public class MainActivity extends FragmentActivity implements
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	/** activity切换动画,进 **/
+	public void pullInAnimation() {
+		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+	}
+
+	/** activity切换动画，退 **/
+	public void pullOutAnimation() {
+		overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in);
 	}
 }
