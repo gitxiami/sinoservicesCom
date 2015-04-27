@@ -37,7 +37,7 @@
         </activity>
         <activity android:name="com.sinoservices.common.BaseActivity"></activity>
         <activity android:name="com.sinoservices.common.activity.AssistantActivity"></activity>
-        
+        <activity android:name="com.sinoservices.common.activity.ModuleWebActivity"></activity>
         
         
         <!-- ============================push富媒体，不使用富媒体推送不需要======================================= -->

@@ -2,25 +2,28 @@ package com.sinoservices.common.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+import com.sinoservices.common.Global;
+import com.sinoservices.common.entity.ModuleEntity;
 
 public class DbHelper extends OrmLiteSqliteOpenHelper {
 
 	private static final String TAG = "DbHelper";
 
 	public DbHelper(Context context) {
-		super(context, null, null, 1);
-//		super(context, Constants.DATABASE_NAME, null,
-//				Constants.DATABASE_VERSION);
+		super(context, Global.DATABASE_NAME, null,
+				Global.DATABASE_VERSION);
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase sqliteDatabase,
 			ConnectionSource connectionSource) {
 		try {
-			
-//			TableUtils.createTableIfNotExists(connectionSource, User.class);
+			//新建应用模块数据表
+			TableUtils.createTableIfNotExists(connectionSource, ModuleEntity.class);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,6 +43,5 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
 //			userDao = super.getDao(User.class); 
 //		return userDao;
 //	}
-
 
 }
