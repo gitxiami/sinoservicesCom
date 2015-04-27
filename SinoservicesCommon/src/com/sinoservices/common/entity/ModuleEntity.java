@@ -1,6 +1,14 @@
 package com.sinoservices.common.entity;
 
-public class ModuleEntity {
+import com.sinoservices.common.db.Entity;
+/**
+ * @ClassName: ModuleEntity 
+ * @Description: 应用模块数据模型表
+ * @author Jerry 
+ * @date 2015年4月27日 下午4:40:21 
+ *
+ */
+public class ModuleEntity extends Entity{
 	
 	private String modulename;
 
@@ -31,5 +39,7 @@ public class ModuleEntity {
 	public void setModulestatus(String modulestatus) {
 		this.modulestatus = modulestatus;
 	}
-
+   
+	public ModuleEntity(){
+	}
 }
