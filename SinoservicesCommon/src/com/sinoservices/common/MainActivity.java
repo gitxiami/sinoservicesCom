@@ -4,6 +4,7 @@ import com.sinoservices.common.ResideMenu.ResideMenu;
 import com.sinoservices.common.ResideMenu.ResideMenuInfo;
 import com.sinoservices.common.ResideMenu.ResideMenuItem;
 import com.sinoservices.common.activity.AssistantActivity;
+import com.sinoservices.common.fragment.AppFragment;
 import com.sinoservices.common.fragment.ContactFragment;
 import com.sinoservices.common.fragment.MessageFragment;
 
@@ -54,8 +55,8 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 
 		setUpMenu();
@@ -183,6 +184,7 @@ public class MainActivity extends FragmentActivity implements
 			findViewById(R.id.main_bottom_tab3_iv_bg).setBackgroundResource(
 					R.drawable.main_bottom_tab3_select);
 			main_bottom_tab3_tv.setTextColor(getResources().getColor(R.color.main_bottom_tv_select_bg_color));
+			changeFragment(new AppFragment());
 			break;
 		case 4:
 			//∑¢œ÷“≥√Ê
