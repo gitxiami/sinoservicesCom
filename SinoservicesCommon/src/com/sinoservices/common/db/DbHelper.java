@@ -1,10 +1,8 @@
 package com.sinoservices.common.db;
 
 import java.sql.SQLException;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -32,7 +30,6 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
 			// 新建应用模块数据表
 			TableUtils.createTableIfNotExists(connectionSource,
 					ModuleEntity.class);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogUtil.d(TAG, e.toString());
@@ -61,5 +58,5 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
 			moduleEntityDao = super.getDao(ModuleEntity.class);
 		return moduleEntityDao;
 	}
-
+		
 }

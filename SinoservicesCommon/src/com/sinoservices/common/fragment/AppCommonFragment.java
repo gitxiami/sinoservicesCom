@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sinoservices.common.R;
+import com.sinoservices.common.entity.ModuleEntity;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,30 +28,57 @@ public class AppCommonFragment extends Fragment {
 	View view;
 	GridView gv;
 	
+	List<ModuleEntity> moduleEntities = new ArrayList<ModuleEntity>();
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		view = inflater.inflate(R.layout.fragment_app_common, container, false);
 		
-	    //图片ID数组 
+		// 百度推模块实体
+		ModuleEntity baiduPushModule = new ModuleEntity();
+		baiduPushModule.setModulename("百度推送");
+		baiduPushModule.setModuleurl("http://commonserver.duapp.com/push.jsp");
+		baiduPushModule.setModulestatus("true");
+		baiduPushModule.setModuleid(R.drawable.baidu_push_icon);
+		
+		// 微信支付模块实体
+		ModuleEntity wxPayModule = new ModuleEntity();
+		wxPayModule.setModulename("微信支付");
+		wxPayModule.setModuleurl("http://commonserver.duapp.com/wxpay.jsp");
+		wxPayModule.setModulestatus("false");
+		wxPayModule.setModuleid(R.drawable.wxpay_icon);
+		
+		// 增加模块实体
+		ModuleEntity addModule = new ModuleEntity();
+		addModule.setModulename("");
+		addModule.setModuleurl(null);
+		addModule.setModulestatus("false");
+		addModule.setModuleid(R.drawable.item_add);
+		
+		moduleEntities.add(baiduPushModule);
+		moduleEntities.add(wxPayModule);
+		moduleEntities.add(addModule);
+		
+/*	    //图片ID数组 
 	    int[] images = new int[]{        
-	            R.drawable.item_hr_self, R.drawable.item_todo, R.drawable.item_document,  
-	            R.drawable.item_schedule, R.drawable.item_email, R.drawable.item_it5000,  
-	            R.drawable.item_business, R.drawable.item_mall,R.drawable.item_add  
+	            R.drawable.baidu_push_icon, R.drawable.wxpay_icon, R.drawable.item_add
 	    }; 
 	    
 	    //图片的文字标题 
 	    String[] titles = new String[] 
-	    { "HR自助", "待办", "公文", "日程", "邮件", "IT5000", "外事商务", "员工商城", ""}; 
-	   
+	    { "百度推送", "微信支付", ""}; 
+*/	   
 		//准备要添加的数据条目 
         List<Map<String, Object>> items = new ArrayList<Map<String,Object>>(); 
-        for (int i = 0; i < 9; i++) { 
-          Map<String, Object> item = new HashMap<String, Object>(); 
-          item.put("imageItem", images[i]);//添加图像资源的ID   
-          item.put("textItem", titles[i]);//按序号添加ItemText   
-          items.add(item); 
+        for (int i = 0; i < moduleEntities.size(); i++) { 
+        	if ("true".equals(moduleEntities.get(i).getModulestatus())) {
+				Map<String, Object> item = new HashMap<String, Object>(); 
+				item.put("imageItem", moduleEntities.get(i).getModuleid());	//添加图像资源的ID   
+				item.put("textItem", moduleEntities.get(i).getModulename());//按序号添加ItemText   
+				items.add(item); 
+			}
         } 
 
        //实例化一个适配器 
