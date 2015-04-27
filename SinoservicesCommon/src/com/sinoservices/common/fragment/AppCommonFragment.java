@@ -6,15 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 import com.sinoservices.common.R;
+import com.sinoservices.common.activity.ModuleWebActivity;
 import com.sinoservices.common.entity.ModuleEntity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 /**
  * @ClassName: ApppFragment
@@ -92,7 +97,17 @@ public class AppCommonFragment extends Fragment {
         gv = (GridView)view.findViewById(R.id.gv_app); 
         //Œ™GridView…Ë÷√  ≈‰∆˜ 
         gv.setAdapter(adapter);		
-				
+        gv.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				//Toast.makeText(getActivity(), ""+position, 0).show();
+				Intent intent=new Intent(getActivity(),ModuleWebActivity.class);
+				intent.putExtra("ModuleEntity", moduleEntities.get(position));
+				startActivity(intent);
+				getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+			}
+		});		
 		return view;
 	}
 	

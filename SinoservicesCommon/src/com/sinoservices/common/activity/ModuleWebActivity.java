@@ -54,7 +54,7 @@ public class ModuleWebActivity extends BaseActivity {
 	}
     /**初始化加载页面**/
 	private void initWebContent(final ModuleEntity moduleEntity2) {
-		if(moduleEntity2==null&&moduleEntity2.getModulename()!=null&&moduleEntity2.getModuleurl()!=null){
+		if(moduleEntity2!=null&&moduleEntity2.getModulename()!=null&&moduleEntity2.getModuleurl()!=null){
 			titleBar.getCenter_title_tv().setText(moduleEntity2.getModulename());
 			module_webview.loadUrl(moduleEntity2.getModuleurl());
 //			titleBar.getCenter_title_tv().setText("微信支付");
@@ -85,6 +85,7 @@ public class ModuleWebActivity extends BaseActivity {
 			public void onClick(View v) {
 				// 返回按钮事件
 				finish();
+				pullOutAnimation();
 			}
 		});
 	}
