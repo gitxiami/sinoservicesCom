@@ -3,10 +3,9 @@ package com.sinoservices.common.entity;
 public class ModuleEntity {
 	
 	private String modulename;
-
 	private String moduleurl;
-
 	private String modulestatus;
+	private int moduleid;
 
 	public String getModulename() {
 		return modulename;
@@ -30,6 +29,14 @@ public class ModuleEntity {
 
 	public void setModulestatus(String modulestatus) {
 		this.modulestatus = modulestatus;
+	}
+
+	public int getModuleid() {
+		return moduleid;
+	}
+
+	public void setModuleid(int moduleid) {
+		this.moduleid = moduleid;
 	}
 
 }
