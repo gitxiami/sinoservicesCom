@@ -6,9 +6,6 @@ import com.google.gson.Gson;
 
 /**
  * JSON解析辅助类，调用GSON组件处理
- * 
- * @author vernon.ye
- *
  */
 public class JsonHelper {
 

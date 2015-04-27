@@ -11,6 +11,7 @@ import com.sinoservices.common.fragment.MessageFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -50,7 +51,9 @@ public class MainActivity extends FragmentActivity implements
 	private boolean is_closed = false;
 	private long mExitTime;
 	private Button leftMenu;
-
+    
+	private boolean isFirstIn=true;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,6 +127,7 @@ public class MainActivity extends FragmentActivity implements
 	private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
 		@Override
 		public void openMenu() {
+			isFirstIn=false;
 			is_closed = false;
 			leftMenu.setVisibility(View.GONE);
 		}
@@ -137,6 +141,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View view) {
+		isFirstIn=false;
 		if (view.getId() == R.id.main_ly_tab1) {
 			//ÏûÏ¢Ò³Ãæ
 			selectIndex(1);
@@ -260,7 +265,11 @@ public class MainActivity extends FragmentActivity implements
 					super.onBackPressed();
 				}
 			} else {
-				resideMenu.closeMenu();
+				if(isFirstIn){
+					finish();
+				}else{
+					resideMenu.closeMenu();		
+				}
 			}
 			return true;
 		}

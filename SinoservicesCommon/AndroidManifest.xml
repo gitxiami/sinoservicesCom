@@ -27,14 +27,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.sinoservices.common.activity.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.sinoservices.common.MainActivity"></activity>
         <activity android:name="com.sinoservices.common.BaseActivity"></activity>
         <activity android:name="com.sinoservices.common.activity.AssistantActivity"></activity>
         <activity android:name="com.sinoservices.common.activity.ModuleWebActivity"></activity>
@@ -101,7 +101,7 @@
             android:exported="true" />
         <!-- ================================push结束========================================================= -->
 		<!-- 在百度开发者中心查询应用的API Key -->
-        <meta-data android:name="api_key" android:value="TGN4yG2C1PzqFunCQygwMGiI" />
+        <meta-data android:name="api_key" android:value="dWXvv0FjlzMITzdMpkWoQi8K" />
     </application>
 
 </manifest>

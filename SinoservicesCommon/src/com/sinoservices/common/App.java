@@ -2,6 +2,7 @@ package com.sinoservices.common;
 
 import com.baidu.frontia.FrontiaApplication;
 import com.sinoservices.common.push.BaiDuPushManager;
+import com.sinoservices.common.util.LogUtil;
 
 import android.app.Application;
 
@@ -16,6 +17,8 @@ public class App extends Application {
 		super.onCreate();
 		//初始化百度云推送
 		initBDPush();
+		//初始化日志管理器
+		initLogMode(Global.LOGTAG,Global.ISDEBUG);
 	}
 	
 	/**
@@ -28,5 +31,17 @@ public class App extends Application {
 		FrontiaApplication.initFrontiaApplication(App.this);
 		BaiDuPushManager.getInstance(App.this);
 	}
+    /**
+     * @Title: initLogMode 
+     * @Description: 初始化日志管理器
+     * @param @param tag
+     * @param @param isDebug 
+     * @return void 
+     * @throws
+     */
+	public void initLogMode(String tag,boolean isDebug){
+		LogUtil.getInstance(tag, isDebug);
+	}
+	
 	
 }
