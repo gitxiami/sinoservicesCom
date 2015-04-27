@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.sinoservices.common.BaseActivity"></activity>
+        <activity android:name="com.sinoservices.common.activity.AssistantActivity"></activity>
     </application>
 
 </manifest>
