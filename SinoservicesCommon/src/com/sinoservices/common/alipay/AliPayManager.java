@@ -1,16 +1,13 @@
-package com.sinoservices.common.jsinterface;
+package com.sinoservices.common.alipay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 import com.alipay.sdk.app.PayTask;
-import com.sinoservices.common.alipay.Constant;
-import com.sinoservices.common.alipay.SignUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,64 +15,44 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
+
+
 /**
- * @ClassName: JsCall 
- * @Description: jsCall¾ßÌåÊµÏÖÀà
- * @author Jerry 
- * @date 2015Äê4ÔÂ28ÈÕ ÉÏÎç9:04:19 
+ * 
+* @ClassName: AliPayManager 
+* @Description: é˜¿é‡Œæ”¯ä»˜å®æ”¯ä»˜ç®¡ç†ç±» 
+* @author Felix Shi
+* @date 2015-4-28 ä¸Šåˆ11:17:24 
+*
  */
-public class JsCall implements JsCallDao {
+public class AliPayManager {
 	Context context;
 	Handler mHandler;
-
-	public JsCall() {
-		super();
-	}
-
-	public JsCall(Context context, Handler mHandler) {
+	
+	public AliPayManager(Context context, Handler mHandler) {
 		super();
 		this.context = context;
 		this.mHandler = mHandler;
 	}
 
-	@Override
-	public void openRichMediaList() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setTags(List<String> tags) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delTags(List<String> tags) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	/** ==================Ö§¸¶±¦Ö§¸¶=======================**/
 	/**
-	 * call alipay sdk pay. µ÷ÓÃSDKÖ§¸¶
+	 * call alipay sdk pay. è°ƒç”¨SDKæ”¯ä»˜
 	 * 
 	 */
-	@Override
 	public void pay(String subject, String body, String price) {
-		// ¶©µ¥
+		// è®¢å•
 		String orderInfo = getOrderInfo(subject, body, price);
 
-		// ¶Ô¶©µ¥×öRSA Ç©Ãû
+		// å¯¹è®¢å•åšRSA ç­¾å
 		String sign = sign(orderInfo);
 		try {
-			// ½öĞè¶Ôsign ×öURL±àÂë
+			// ä»…éœ€å¯¹sign åšURLç¼–ç 
 			sign = URLEncoder.encode(sign, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 
-		// ÍêÕûµÄ·ûºÏÖ§¸¶±¦²ÎÊı¹æ·¶µÄ¶©µ¥ĞÅÏ¢
+		// å®Œæ•´çš„ç¬¦åˆæ”¯ä»˜å®å‚æ•°è§„èŒƒçš„è®¢å•ä¿¡æ¯
 		final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
 				+ getSignType();
 
@@ -83,9 +60,9 @@ public class JsCall implements JsCallDao {
 
 			@Override
 			public void run() {
-				// ¹¹ÔìPayTask ¶ÔÏó
+				// æ„é€ PayTask å¯¹è±¡
 				PayTask alipay = new PayTask((Activity) context);
-				// µ÷ÓÃÖ§¸¶½Ó¿Ú£¬»ñÈ¡Ö§¸¶½á¹û
+				// è°ƒç”¨æ”¯ä»˜æ¥å£ï¼Œè·å–æ”¯ä»˜ç»“æœ
 				String result = alipay.pay(payInfo);
 
 				Message msg = new Message();
@@ -95,25 +72,24 @@ public class JsCall implements JsCallDao {
 			}
 		};
 
-		// ±ØĞëÒì²½µ÷ÓÃ
+		// å¿…é¡»å¼‚æ­¥è°ƒç”¨
 		Thread payThread = new Thread(payRunnable);
 		payThread.start();
 	}
 
 	/**
 	 * check whether the device has authentication alipay account.
-	 * ²éÑ¯ÖÕ¶ËÉè±¸ÊÇ·ñ´æÔÚÖ§¸¶±¦ÈÏÖ¤ÕË»§
+	 * æŸ¥è¯¢ç»ˆç«¯è®¾å¤‡æ˜¯å¦å­˜åœ¨æ”¯ä»˜å®è®¤è¯è´¦æˆ·
 	 * 
 	 */
-	@Override
-	public void check(View v) {
+	public void check() {
 		Runnable checkRunnable = new Runnable() {
 
 			@Override
 			public void run() {
-				// ¹¹ÔìPayTask ¶ÔÏó
+				// æ„é€ PayTask å¯¹è±¡
 				PayTask payTask = new PayTask((Activity) context);
-				// µ÷ÓÃ²éÑ¯½Ó¿Ú£¬»ñÈ¡²éÑ¯½á¹û
+				// è°ƒç”¨æŸ¥è¯¢æ¥å£ï¼Œè·å–æŸ¥è¯¢ç»“æœ
 				boolean isExist = payTask.checkAccountIfExist();
 
 				Message msg = new Message();
@@ -125,13 +101,13 @@ public class JsCall implements JsCallDao {
 
 		Thread checkThread = new Thread(checkRunnable);
 		checkThread.start();
+
 	}
 
 	/**
-	 * get the sdk version. »ñÈ¡SDK°æ±¾ºÅ
+	 * get the sdk version. è·å–SDKç‰ˆæœ¬å·
 	 * 
 	 */
-	@Override
 	public void getSDKVersion() {
 		PayTask payTask = new PayTask((Activity) context);
 		String version = payTask.getVersion();
@@ -139,66 +115,64 @@ public class JsCall implements JsCallDao {
 	}
 
 	/**
-	 * create the order info. ´´½¨¶©µ¥ĞÅÏ¢
+	 * create the order info. åˆ›å»ºè®¢å•ä¿¡æ¯
 	 * 
 	 */
-	@Override
 	public String getOrderInfo(String subject, String body, String price) {
-		// Ç©Ô¼ºÏ×÷ÕßÉí·İID
+		// ç­¾çº¦åˆä½œè€…èº«ä»½ID
 		String orderInfo = "partner=" + "\"" + Constant.PARTNER + "\"";
 
-		// Ç©Ô¼Âô¼ÒÖ§¸¶±¦ÕËºÅ
+		// ç­¾çº¦å–å®¶æ”¯ä»˜å®è´¦å·
 		orderInfo += "&seller_id=" + "\"" + Constant.SELLER + "\"";
 
-		// ÉÌ»§ÍøÕ¾Î¨Ò»¶©µ¥ºÅ
+		// å•†æˆ·ç½‘ç«™å”¯ä¸€è®¢å•å·
 		orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
 
-		// ÉÌÆ·Ãû³Æ
+		// å•†å“åç§°
 		orderInfo += "&subject=" + "\"" + subject + "\"";
 
-		// ÉÌÆ·ÏêÇé
+		// å•†å“è¯¦æƒ…
 		orderInfo += "&body=" + "\"" + body + "\"";
 
-		// ÉÌÆ·½ğ¶î
+		// å•†å“é‡‘é¢
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
-		// ·şÎñÆ÷Òì²½Í¨ÖªÒ³ÃæÂ·¾¶
+		// æœåŠ¡å™¨å¼‚æ­¥é€šçŸ¥é¡µé¢è·¯å¾„
 		orderInfo += "&notify_url=" + "\"" + "http://notify.msp.hk/notify.htm"
 				+ "\"";
 
-		// ·şÎñ½Ó¿ÚÃû³Æ£¬ ¹Ì¶¨Öµ
+		// æœåŠ¡æ¥å£åç§°ï¼Œ å›ºå®šå€¼
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
 
-		// Ö§¸¶ÀàĞÍ£¬ ¹Ì¶¨Öµ
+		// æ”¯ä»˜ç±»å‹ï¼Œ å›ºå®šå€¼
 		orderInfo += "&payment_type=\"1\"";
 
-		// ²ÎÊı±àÂë£¬ ¹Ì¶¨Öµ
+		// å‚æ•°ç¼–ç ï¼Œ å›ºå®šå€¼
 		orderInfo += "&_input_charset=\"utf-8\"";
 
-		// ÉèÖÃÎ´¸¶¿î½»Ò×µÄ³¬Ê±Ê±¼ä
-		// Ä¬ÈÏ30·ÖÖÓ£¬Ò»µ©³¬Ê±£¬¸Ã±Ê½»Ò×¾Í»á×Ô¶¯±»¹Ø±Õ¡£
-		// È¡Öµ·¶Î§£º1m¡«15d¡£
-		// m-·ÖÖÓ£¬h-Ğ¡Ê±£¬d-Ìì£¬1c-µ±Ìì£¨ÎŞÂÛ½»Ò×ºÎÊ±´´½¨£¬¶¼ÔÚ0µã¹Ø±Õ£©¡£
-		// ¸Ã²ÎÊıÊıÖµ²»½ÓÊÜĞ¡Êıµã£¬Èç1.5h£¬¿É×ª»»Îª90m¡£
+		// è®¾ç½®æœªä»˜æ¬¾äº¤æ˜“çš„è¶…æ—¶æ—¶é—´
+		// é»˜è®¤30åˆ†é’Ÿï¼Œä¸€æ—¦è¶…æ—¶ï¼Œè¯¥ç¬”äº¤æ˜“å°±ä¼šè‡ªåŠ¨è¢«å…³é—­ã€‚
+		// å–å€¼èŒƒå›´ï¼š1mï½15dã€‚
+		// m-åˆ†é’Ÿï¼Œh-å°æ—¶ï¼Œd-å¤©ï¼Œ1c-å½“å¤©ï¼ˆæ— è®ºäº¤æ˜“ä½•æ—¶åˆ›å»ºï¼Œéƒ½åœ¨0ç‚¹å…³é—­ï¼‰ã€‚
+		// è¯¥å‚æ•°æ•°å€¼ä¸æ¥å—å°æ•°ç‚¹ï¼Œå¦‚1.5hï¼Œå¯è½¬æ¢ä¸º90mã€‚
 		orderInfo += "&it_b_pay=\"30m\"";
 
-		// extern_tokenÎª¾­¹ı¿ìµÇÊÚÈ¨»ñÈ¡µ½µÄalipay_open_id,´øÉÏ´Ë²ÎÊıÓÃ»§½«Ê¹ÓÃÊÚÈ¨µÄÕË»§½øĞĞÖ§¸¶
+		// extern_tokenä¸ºç»è¿‡å¿«ç™»æˆæƒè·å–åˆ°çš„alipay_open_id,å¸¦ä¸Šæ­¤å‚æ•°ç”¨æˆ·å°†ä½¿ç”¨æˆæƒçš„è´¦æˆ·è¿›è¡Œæ”¯ä»˜
 		// orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
 
-		// Ö§¸¶±¦´¦ÀíÍêÇëÇóºó£¬µ±Ç°Ò³ÃæÌø×ªµ½ÉÌ»§Ö¸¶¨Ò³ÃæµÄÂ·¾¶£¬¿É¿Õ
+		// æ”¯ä»˜å®å¤„ç†å®Œè¯·æ±‚åï¼Œå½“å‰é¡µé¢è·³è½¬åˆ°å•†æˆ·æŒ‡å®šé¡µé¢çš„è·¯å¾„ï¼Œå¯ç©º
 		orderInfo += "&return_url=\"m.alipay.com\"";
 
-		// µ÷ÓÃÒøĞĞ¿¨Ö§¸¶£¬ĞèÅäÖÃ´Ë²ÎÊı£¬²ÎÓëÇ©Ãû£¬ ¹Ì¶¨Öµ £¨ĞèÒªÇ©Ô¼¡¶ÎŞÏßÒøĞĞ¿¨¿ì½İÖ§¸¶¡·²ÅÄÜÊ¹ÓÃ£©
+		// è°ƒç”¨é“¶è¡Œå¡æ”¯ä»˜ï¼Œéœ€é…ç½®æ­¤å‚æ•°ï¼Œå‚ä¸ç­¾åï¼Œ å›ºå®šå€¼ ï¼ˆéœ€è¦ç­¾çº¦ã€Šæ— çº¿é“¶è¡Œå¡å¿«æ·æ”¯ä»˜ã€‹æ‰èƒ½ä½¿ç”¨ï¼‰
 		// orderInfo += "&paymethod=\"expressGateway\"";
 
 		return orderInfo;
 	}
 
 	/**
-	 * get the out_trade_no for an order. Éú³ÉÉÌ»§¶©µ¥ºÅ£¬¸ÃÖµÔÚÉÌ»§¶ËÓ¦±£³ÖÎ¨Ò»£¨¿É×Ô¶¨Òå¸ñÊ½¹æ·¶£©
+	 * get the out_trade_no for an order. ç”Ÿæˆå•†æˆ·è®¢å•å·ï¼Œè¯¥å€¼åœ¨å•†æˆ·ç«¯åº”ä¿æŒå”¯ä¸€ï¼ˆå¯è‡ªå®šä¹‰æ ¼å¼è§„èŒƒï¼‰
 	 * 
 	 */
-	@Override
 	public String getOutTradeNo() {
 		SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss",
 				Locale.getDefault());
@@ -212,25 +186,20 @@ public class JsCall implements JsCallDao {
 	}
 
 	/**
-	 * sign the order info. ¶Ô¶©µ¥ĞÅÏ¢½øĞĞÇ©Ãû
+	 * sign the order info. å¯¹è®¢å•ä¿¡æ¯è¿›è¡Œç­¾å
 	 * 
 	 * @param content
-	 *            ´ıÇ©Ãû¶©µ¥ĞÅÏ¢
+	 *            å¾…ç­¾åè®¢å•ä¿¡æ¯
 	 */
-	@Override
 	public String sign(String content) {
 		return SignUtils.sign(content, Constant.RSA_PRIVATE);
 	}
 
 	/**
-	 * get the sign type we use. »ñÈ¡Ç©Ãû·½Ê½
+	 * get the sign type we use. è·å–ç­¾åæ–¹å¼
 	 * 
 	 */
-	@Override
 	public String getSignType() {
 		return "sign_type=\"RSA\"";
 	}
-	
-	/** ==================Ö§¸¶±¦Ö§¸¶end=======================**/
-
 }

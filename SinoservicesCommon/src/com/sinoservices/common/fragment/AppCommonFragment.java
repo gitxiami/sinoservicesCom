@@ -28,14 +28,13 @@ import android.widget.Toast;
  * @date 2015年4月27日 上午9:00:00
  *
  */
-
-
 public class AppCommonFragment extends Fragment {
 	
 	View view;
 	GridView gv;
 	
-	List<ModuleEntity> moduleEntities = new ArrayList<ModuleEntity>();
+	List<ModuleEntity> allEntities = new ArrayList<ModuleEntity>();
+	List<ModuleEntity> displayEntities = new ArrayList<ModuleEntity>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +42,7 @@ public class AppCommonFragment extends Fragment {
 		
 		view = inflater.inflate(R.layout.fragment_app_common, container, false);
 		
-		// 百度推模块实体
+		// 百度推送模块实体
 		ModuleEntity baiduPushModule = new ModuleEntity();
 		baiduPushModule.setModulename("百度推送");
 		baiduPushModule.setModuleurl("http://commonserver.duapp.com/push.jsp");
@@ -54,36 +53,36 @@ public class AppCommonFragment extends Fragment {
 		ModuleEntity wxPayModule = new ModuleEntity();
 		wxPayModule.setModulename("微信支付");
 		wxPayModule.setModuleurl("http://commonserver.duapp.com/wxpay.jsp");
-		wxPayModule.setModulestatus("true");
+		wxPayModule.setModulestatus("false");
 		wxPayModule.setModuleid(R.drawable.wxpay_icon);
+		
+		// 支付宝支付模块实体
+		ModuleEntity aliPayModule = new ModuleEntity();
+		aliPayModule.setModulename("支付宝支付");
+		aliPayModule.setModuleurl("http://sinoserver.duapp.com/alipay.html");
+		aliPayModule.setModulestatus("true");
+		aliPayModule.setModuleid(R.drawable.alipay_icon);
 		
 		// 增加模块实体
 		ModuleEntity addModule = new ModuleEntity();
-		addModule.setModulename("");
+		addModule.setModulename("添加应用");
 		addModule.setModuleurl("local");
 		addModule.setModulestatus("true");
 		addModule.setModuleid(R.drawable.item_add);
 		
-		moduleEntities.add(baiduPushModule);
-		moduleEntities.add(wxPayModule);
-		moduleEntities.add(addModule);
+		allEntities.add(baiduPushModule);
+		allEntities.add(wxPayModule);
+		allEntities.add(aliPayModule);
+		allEntities.add(addModule);
 		
-/*	    //图片ID数组 
-	    int[] images = new int[]{        
-	            R.drawable.baidu_push_icon, R.drawable.wxpay_icon, R.drawable.item_add
-	    }; 
-	    
-	    //图片的文字标题 
-	    String[] titles = new String[] 
-	    { "百度推送", "微信支付", ""}; 
-*/	   
 		//准备要添加的数据条目 
         List<Map<String, Object>> items = new ArrayList<Map<String,Object>>(); 
-        for (int i = 0; i < moduleEntities.size(); i++) { 
-        	if ("true".equals(moduleEntities.get(i).getModulestatus())) {
+        for (int i = 0; i < allEntities.size(); i++) { 
+        	if ("true".equals(allEntities.get(i).getModulestatus())) {
+        		displayEntities.add(allEntities.get(i));
 				Map<String, Object> item = new HashMap<String, Object>(); 
-				item.put("imageItem", moduleEntities.get(i).getModuleid());	//添加图像资源的ID   
-				item.put("textItem", moduleEntities.get(i).getModulename());//按序号添加ItemText   
+				item.put("imageItem", allEntities.get(i).getModuleid());	//添加图像资源的ID   
+				item.put("textItem", allEntities.get(i).getModulename());//按序号添加ItemText   
 				items.add(item); 
 			}
         } 
@@ -104,8 +103,9 @@ public class AppCommonFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Toast.makeText(getActivity(), ""+position, 0).show();
-				Intent intent=new Intent(getActivity(),ModuleWebActivity.class);
-				intent.putExtra("ModuleEntity", moduleEntities.get(position));
+				Intent intent=new Intent(getActivity(), ModuleWebActivity.class);
+//				Intent intent=new Intent(getActivity(), PayDemoActivity.class);
+				intent.putExtra("ModuleEntity", displayEntities.get(position));
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			}
