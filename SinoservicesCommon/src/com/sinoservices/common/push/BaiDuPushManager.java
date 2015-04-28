@@ -69,13 +69,14 @@ public class BaiDuPushManager {
 	/**
 	 * 打开富媒体列表界面
 	 */
-	private static void openRichMediaList() {
+	public static void openRichMediaList() {
 		// Push: 打开富媒体消息列表
 		Intent sendIntent = new Intent();
 		sendIntent.setClassName(mContext,
 				"com.baidu.android.pushservice.richmedia.MediaListActivity");
 		sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mContext.startActivity(sendIntent);
+		
 	}
 
 	/**

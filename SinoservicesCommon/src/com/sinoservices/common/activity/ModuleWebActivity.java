@@ -1,5 +1,6 @@
 package com.sinoservices.common.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,6 +51,7 @@ public class ModuleWebActivity extends BaseActivity {
 	/**js与java交互类**/
 	private JsCall jsCall;
 	
+	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,7 +126,7 @@ public class ModuleWebActivity extends BaseActivity {
 		module_webview=(WebView) v.findViewById(R.id.module_webview);
 		webSettings = module_webview.getSettings();  
         webSettings.setBuiltInZoomControls(false); 
-        webSettings.setJavaScriptEnabled(true);
+        module_webview.getSettings().setJavaScriptEnabled(true);
         module_webview.addJavascriptInterface(jsCall, "jscall");
         
 		// 设置右边部分不可见

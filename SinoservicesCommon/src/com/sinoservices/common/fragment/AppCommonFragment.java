@@ -45,7 +45,7 @@ public class AppCommonFragment extends Fragment {
 		// 百度推送模块实体
 		ModuleEntity baiduPushModule = new ModuleEntity();
 		baiduPushModule.setModulename("百度推送");
-		baiduPushModule.setModuleurl("http://commonserver.duapp.com/push.jsp");
+		baiduPushModule.setModuleurl("http://commonserver.duapp.com/bdpush.html");
 		baiduPushModule.setModulestatus("true");
 		baiduPushModule.setModuleid(R.drawable.baidu_push_icon);
 		
