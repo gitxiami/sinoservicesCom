@@ -11,9 +11,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
+
 import com.sinoservices.common.BaseActivity;
 import com.sinoservices.common.R;
 import com.sinoservices.common.entity.ModuleEntity;
+import com.sinoservices.common.jsinterface.JsCall;
 import com.sinoservices.common.view.TitleBar;
 
 /**
@@ -33,9 +35,14 @@ public class ModuleWebActivity extends BaseActivity {
 	private RelativeLayout content_container;
 	/** 界面实际内容布局 **/
 	private View view;
+	/**接收上个页面传来的Intent**/
 	private Intent intent=null;
+	/**接收上个页面传来的参数实体**/
 	private ModuleEntity moduleEntity=null;
+	/**websetting设置**/
 	private WebSettings webSettings ;
+	/**js与java交互类**/
+	private JsCall jsCall;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +71,12 @@ public class ModuleWebActivity extends BaseActivity {
 	}
 
 	private void initViews(View v) {
+		jsCall=new JsCall();
 		module_webview=(WebView) v.findViewById(R.id.module_webview);
 		webSettings = module_webview.getSettings();  
         webSettings.setBuiltInZoomControls(false); 
         webSettings.setJavaScriptEnabled(true);
+        module_webview.addJavascriptInterface(jsCall, "jscall");
         
 		// 设置右边部分不可见
 		titleBar.getRight_container().setVisibility(View.GONE);

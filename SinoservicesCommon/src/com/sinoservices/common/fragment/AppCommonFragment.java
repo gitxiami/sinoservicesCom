@@ -22,7 +22,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 /**
- * @ClassName: ApppFragment
+ * @ClassName: ApppCommonFragment
  * @Description: 应用页面
  * @author Felix
  * @date 2015年4月27日 上午9:00:00
@@ -52,14 +52,14 @@ public class AppCommonFragment extends Fragment {
 		ModuleEntity wxPayModule = new ModuleEntity();
 		wxPayModule.setModulename("微信支付");
 		wxPayModule.setModuleurl("http://commonserver.duapp.com/wxpay.jsp");
-		wxPayModule.setModulestatus("false");
+		wxPayModule.setModulestatus("true");
 		wxPayModule.setModuleid(R.drawable.wxpay_icon);
 		
 		// 增加模块实体
 		ModuleEntity addModule = new ModuleEntity();
 		addModule.setModulename("");
-		addModule.setModuleurl(null);
-		addModule.setModulestatus("false");
+		addModule.setModuleurl("local");
+		addModule.setModulestatus("true");
 		addModule.setModuleid(R.drawable.item_add);
 		
 		moduleEntities.add(baiduPushModule);
