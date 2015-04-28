@@ -28,6 +28,8 @@ import android.widget.Toast;
  * @date 2015年4月27日 上午9:00:00
  *
  */
+
+
 public class AppCommonFragment extends Fragment {
 	
 	View view;
