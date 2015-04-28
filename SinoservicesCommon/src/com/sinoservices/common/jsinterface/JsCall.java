@@ -73,6 +73,11 @@ public class JsCall implements JsCallDao {
 	public void openClosePush(String status) {
 		// TODO Auto-generated method stub
 		System.out.println("百度推送状态切换");
+		if(status!=null&&status.equals("1")){
+			baiDuPushManager.initWithApiKey();
+		}else if(status!=null&&status.equals("0")){
+			baiDuPushManager.StopBaiDuPush();			
+		}
 	}
 	
 	/** ==================支付宝支付=======================**/
