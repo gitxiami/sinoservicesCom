@@ -100,8 +100,8 @@ public class ModuleWebActivity extends BaseActivity {
 				break;
 			}
 			case Constant.SDK_CHECK_FLAG: {
-				Toast.makeText(ModuleWebActivity.this, "检查结果为：" + msg.obj,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(ModuleWebActivity.this, "" + msg.obj,
+						Toast.LENGTH_LONG).show();
 				break;
 			}
 			default:

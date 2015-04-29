@@ -31,14 +31,18 @@ public class AppFragment extends Fragment {
 		appCommonBt = (Button) view.findViewById(R.id.bt_app_common);
 		appStoreBt = (Button) view.findViewById(R.id.bt_app_store);
 		
-		setDefaultBtBackgroundColor();
+		setDefaultBtBackground();
+		appCommonBt.setBackgroundResource(R.drawable.left_btn_select_bg);
+		appCommonBt.setTextColor(Color.WHITE);
 		changeFragment(new AppCommonFragment());
 		
 		appCommonBt.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				setDefaultBtBackgroundColor();
+				setDefaultBtBackground();
+				appCommonBt.setTextColor(Color.WHITE);
+				appCommonBt.setBackgroundResource(R.drawable.left_btn_select_bg);
 				changeFragment(new AppCommonFragment());
 			}
 		});
@@ -48,7 +52,9 @@ public class AppFragment extends Fragment {
 			
 			@Override
 			public void onClick(View arg0) {
-				setDefaultBtBackgroundColor();
+				setDefaultBtBackground();
+				appStoreBt.setTextColor(Color.WHITE);
+				appStoreBt.setBackgroundResource(R.drawable.right_btn_select_bg);
 				changeFragment(new AppStoreFragment());
 				
 			}
@@ -57,9 +63,11 @@ public class AppFragment extends Fragment {
 		return view;
 	}
 	
-	private void setDefaultBtBackgroundColor() {
-//		appCommonBt.setBackgroundColor(Color.WHITE);
-//		appStoreBt.setBackgroundColor(Color.WHITE);
+	private void setDefaultBtBackground() {
+		appCommonBt.setTextColor(this.getResources().getColor(R.color.app_fragment_button_color));
+		appStoreBt.setTextColor(this.getResources().getColor(R.color.app_fragment_button_color));
+		appCommonBt.setBackgroundResource(R.drawable.left_btn_nor_bg);
+		appStoreBt.setBackgroundResource(R.drawable.right_btn_nor_bg);
 	}
 	
 	/** ÇÐ»»Fragment **/

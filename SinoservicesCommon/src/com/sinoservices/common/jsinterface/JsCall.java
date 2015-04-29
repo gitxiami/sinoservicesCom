@@ -1,16 +1,8 @@
 package com.sinoservices.common.jsinterface;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
-import com.alipay.sdk.app.PayTask;
-import com.sinoservices.common.alipay.Constant;
-import com.sinoservices.common.alipay.SignUtils;
+import com.sinoservices.common.R;
+import com.sinoservices.common.alipay.AliPayManager;
 import com.sinoservices.common.push.BaiDuPushManager;
 import com.sinoservices.gaodemap.activity.GeocoderActivity;
 import com.sinoservices.gaodemap.activity.LocationActivity;
@@ -20,24 +12,35 @@ import com.sinoservices.gaodemap.activity.PoiAroundSearchActivity;
 import com.sinoservices.gaodemap.activity.PoiKeywordSearchActivity;
 
 import android.app.Activity;
+import com.sinoservices.common.push.bdPushUtil;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Handler;
-import android.os.Message;
+import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
 /**
- * @ClassName: JsCall 
+ * @ClassName: JsCall
  * @Description: jsCall具体实现类
- * @author Jerry 
- * @date 2015年4月28日 上午9:04:19 
+ * @author Jerry
+ * @date 2015年4月28日 上午9:04:19
  */
 public class JsCall implements JsCallDao {
 	private BaiDuPushManager baiDuPushManager;
 
 	Context context;
 	Handler mHandler;
+	
+	private AliPayManager aliPayManager;
 
 	public JsCall() {
 		super();
@@ -57,28 +60,83 @@ public class JsCall implements JsCallDao {
 		baiDuPushManager.openRichMediaList();
 	}
 
+	@JavascriptInterface
 	@Override
-	public void setTags(List<String> tags) {
-		// TODO Auto-generated method stub
-
+	public void setTags() {
+		// 设置标签
+		LinearLayout layout = new LinearLayout(context);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		// layout.setBackgroundColor(Color.WHITE);
+		final EditText textviewGid = new EditText(context);
+		textviewGid.setHint("请输入多个标签，以英文逗号隔开");
+		layout.addView(textviewGid);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setView(layout);
+		builder.setPositiveButton("设置标签",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Push: 设置tag调用方式
+						List<String> tags = bdPushUtil.getTagsList(textviewGid
+								.getText().toString());
+						// PushManager.setTags(context, tags);
+						baiDuPushManager = BaiDuPushManager
+								.getInstance(context);
+						baiDuPushManager.setTags(tags);
+					}
+				});
+		builder.show();
 	}
 
+	@JavascriptInterface
 	@Override
-	public void delTags(List<String> tags) {
-		// TODO Auto-generated method stub
-
+	public void delTags() {
+		// 清除标签
+		LinearLayout layout = new LinearLayout(context);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		final EditText textviewGid = new EditText(context);
+		textviewGid.setHint("请输入多个标签，以英文逗号隔开");
+		layout.addView(textviewGid);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setView(layout);
+		builder.setPositiveButton("清除标签",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Push: 删除tag调用方式
+						List<String> tags = bdPushUtil.getTagsList(textviewGid
+								.getText().toString());
+						// PushManager.delTags(context, tags);
+						baiDuPushManager = BaiDuPushManager
+								.getInstance(context);
+						baiDuPushManager.deleteTags(tags);
+					}
+				});
+		builder.show();
 	}
-
+	
+	@JavascriptInterface
 	@Override
 	public void choosePushStyle() {
 		// 选择推送样式
-
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View dialogview = inflater.inflate(R.layout.dialog_bdpush_choosestyle,
+				null);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setView(dialogview);
+		builder.setTitle("通知样式");
+		builder.setPositiveButton("确定", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+//		baiDuPushManager = BaiDuPushManager.getInstance(context);
+//		baiDuPushManager.choosePushStyle(0);
 	}
 
 	@JavascriptInterface
 	@Override
 	public void openClosePush(String status) {
-		// TODO Auto-generated method stub
+		// 百度推送状态切换
 		System.out.println("百度推送状态切换");
 		if(status!=null&&status.equals("1")){
 			baiDuPushManager.initWithApiKey();
@@ -86,8 +144,58 @@ public class JsCall implements JsCallDao {
 			baiDuPushManager.StopBaiDuPush();			
 		}
 	}
-	
-	/** ==================支付宝支付=======================**/
+
+	@JavascriptInterface
+	@Override
+	public void setNoDisturbPushTime() {
+		// 设置免打扰推送时间
+		/** 一天之中的可允许推送范围的起点时间 **/
+		final TimePicker startTime;
+		/** 一天之中的可允许推送范围的结束时间点 **/
+		final TimePicker endTime;
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View dialogview = inflater
+				.inflate(R.layout.dialog_bdpush_settime, null);
+		startTime = (TimePicker) dialogview.findViewById(R.id.start_time);
+		endTime = (TimePicker) dialogview.findViewById(R.id.end_time);
+		// 设置为24小时格式
+		startTime.setIs24HourView(DateFormat.is24HourFormat(context));
+		endTime.setIs24HourView(DateFormat.is24HourFormat(context));
+		// 设置免打扰时间默认为零点到早上七点
+		startTime.setCurrentHour(0);
+		startTime.setCurrentMinute(0);
+		endTime.setCurrentHour(7);
+		endTime.setCurrentMinute(0);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setView(dialogview);
+		builder.setTitle("免打扰时间");
+		builder.setIcon(R.drawable.bdpush_settime_title_icon_bg);
+		builder.setPositiveButton("确定", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int startHour = startTime.getCurrentHour();
+				int endHour = endTime.getCurrentHour();
+				int startMinute = startTime.getCurrentMinute();
+				int endMinute = startTime.getCurrentMinute();
+				if (startHour > endHour) {
+					Toast.makeText(context, "开始时间不能大于结束时间", Toast.LENGTH_SHORT)
+							.show();
+					return;
+				}
+				try {
+					baiDuPushManager = BaiDuPushManager.getInstance(context);
+					baiDuPushManager.setNoDisturbPushTime(startHour,
+							startMinute, endHour, endMinute);
+					Toast.makeText(context, "设置成功！", Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		builder.show();
+	}
+
+	/** ==================支付宝支付======================= **/
 	/**
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
@@ -95,41 +203,8 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public void pay(String subject, String body, String price) {
-		// 订单
-		String orderInfo = getOrderInfo(subject, body, price);
-
-		// 对订单做RSA 签名
-		String sign = sign(orderInfo);
-		try {
-			// 仅需对sign 做URL编码
-			sign = URLEncoder.encode(sign, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		// 完整的符合支付宝参数规范的订单信息
-		final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
-				+ getSignType();
-
-		Runnable payRunnable = new Runnable() {
-
-			@Override
-			public void run() {
-				// 构造PayTask 对象
-				PayTask alipay = new PayTask((Activity) context);
-				// 调用支付接口，获取支付结果
-				String result = alipay.pay(payInfo);
-
-				Message msg = new Message();
-				msg.what = Constant.SDK_PAY_FLAG;
-				msg.obj = result;
-				mHandler.sendMessage(msg);
-			}
-		};
-
-		// 必须异步调用
-		Thread payThread = new Thread(payRunnable);
-		payThread.start();
+		aliPayManager = AliPayManager.getInstance(context, mHandler);
+		aliPayManager.pay(subject, body, price);
 	}
 
 	/**
@@ -139,25 +214,9 @@ public class JsCall implements JsCallDao {
 	 */
 	@JavascriptInterface
 	@Override
-	public void check(View v) {
-		Runnable checkRunnable = new Runnable() {
-
-			@Override
-			public void run() {
-				// 构造PayTask 对象
-				PayTask payTask = new PayTask((Activity) context);
-				// 调用查询接口，获取查询结果
-				boolean isExist = payTask.checkAccountIfExist();
-
-				Message msg = new Message();
-				msg.what = Constant.SDK_CHECK_FLAG;
-				msg.obj = isExist;
-				mHandler.sendMessage(msg);
-			}
-		};
-
-		Thread checkThread = new Thread(checkRunnable);
-		checkThread.start();
+	public void check() {
+		aliPayManager = AliPayManager.getInstance(context, mHandler);
+		aliPayManager.check();
 	}
 
 	/**
@@ -167,9 +226,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public void getSDKVersion() {
-		PayTask payTask = new PayTask((Activity) context);
-		String version = payTask.getVersion();
-		Toast.makeText(context, version, Toast.LENGTH_SHORT).show();
+		aliPayManager.getSDKVersion();
 	}
 
 	/**
@@ -179,54 +236,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public String getOrderInfo(String subject, String body, String price) {
-		// 签约合作者身份ID
-		String orderInfo = "partner=" + "\"" + Constant.PARTNER + "\"";
-
-		// 签约卖家支付宝账号
-		orderInfo += "&seller_id=" + "\"" + Constant.SELLER + "\"";
-
-		// 商户网站唯一订单号
-		orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
-
-		// 商品名称
-		orderInfo += "&subject=" + "\"" + subject + "\"";
-
-		// 商品详情
-		orderInfo += "&body=" + "\"" + body + "\"";
-
-		// 商品金额
-		orderInfo += "&total_fee=" + "\"" + price + "\"";
-
-		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://notify.msp.hk/notify.htm"
-				+ "\"";
-
-		// 服务接口名称， 固定值
-		orderInfo += "&service=\"mobile.securitypay.pay\"";
-
-		// 支付类型， 固定值
-		orderInfo += "&payment_type=\"1\"";
-
-		// 参数编码， 固定值
-		orderInfo += "&_input_charset=\"utf-8\"";
-
-		// 设置未付款交易的超时时间
-		// 默认30分钟，一旦超时，该笔交易就会自动被关闭。
-		// 取值范围：1m～15d。
-		// m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
-		// 该参数数值不接受小数点，如1.5h，可转换为90m。
-		orderInfo += "&it_b_pay=\"30m\"";
-
-		// extern_token为经过快登授权获取到的alipay_open_id,带上此参数用户将使用授权的账户进行支付
-		// orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
-
-		// 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-		orderInfo += "&return_url=\"m.alipay.com\"";
-
-		// 调用银行卡支付，需配置此参数，参与签名， 固定值 （需要签约《无线银行卡快捷支付》才能使用）
-		// orderInfo += "&paymethod=\"expressGateway\"";
-
-		return orderInfo;
+		return aliPayManager.getOrderInfo(subject, body, price);
 	}
 
 	/**
@@ -236,15 +246,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public String getOutTradeNo() {
-		SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss",
-				Locale.getDefault());
-		Date date = new Date();
-		String key = format.format(date);
-
-		Random r = new Random();
-		key = key + r.nextInt();
-		key = key.substring(0, 15);
-		return key;
+		return aliPayManager.getOutTradeNo();
 	}
 
 	/**
@@ -256,7 +258,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public String sign(String content) {
-		return SignUtils.sign(content, Constant.RSA_PRIVATE);
+		return aliPayManager.sign(content);
 	}
 
 	/**
@@ -266,7 +268,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public String getSignType() {
-		return "sign_type=\"RSA\"";
+		return aliPayManager.getSignType();
 	}
 	
 	/** ==================支付宝支付end=======================**/

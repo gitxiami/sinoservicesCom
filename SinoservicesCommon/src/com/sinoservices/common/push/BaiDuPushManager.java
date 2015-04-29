@@ -110,4 +110,60 @@ public class BaiDuPushManager {
 	public static void StopBaiDuPush(){
 		PushManager.stopWork(mContext);
 	}
+
+    /**
+     * @Title: setNoDisturbPushTime 
+     * @Description: 设置免打扰时间
+     * @param @param startHour
+     * @param @param startMinute
+     * @param @param endHour
+     * @param @param endMinute 
+     * @return void 
+     * @throws
+     */
+	public static void setNoDisturbPushTime(int startHour,int startMinute,int endHour,int endMinute){
+		PushManager.setNoDisturbMode(mContext, startHour, startMinute, endHour, endMinute);
+	}
+	/**
+	 * @Title: choosePushStyle 
+	 * @Description: 样式选择
+	 * @param  what 基础样式：0 自定义样式：1
+	 * @return void 
+	 * @throws
+	 */
+	public static void choosePushStyle(int what){
+		switch (what) {
+		case 0:
+			CustomPushNotificationBuilder cBuilder = new CustomPushNotificationBuilder(
+					mContext, R.layout.baidupush_notification_custom_builder,
+					R.id.notification_icon, R.id.notification_title,
+					R.id.notification_text) {
+			};
+			cBuilder.setNotificationFlags(Notification.FLAG_AUTO_CANCEL);
+			cBuilder.setNotificationDefaults(Notification.DEFAULT_SOUND
+					| Notification.DEFAULT_VIBRATE);
+			cBuilder.setStatusbarIcon(mContext.getApplicationInfo().icon);
+			cBuilder.setLayoutDrawable(R.drawable.ic_launcher);
+			// Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
+			// PushManager.enableLbs(mContext);
+			PushManager.setNotificationBuilder(mContext, 1, cBuilder);
+			break;
+		case 1:
+				CustomPushNotificationBuilder cBuilder2 = new CustomPushNotificationBuilder(
+						mContext, R.layout.baidupush_notification_custom_builder,
+						R.id.notification_icon, R.id.notification_title,
+						R.id.notification_text) {
+				};
+				cBuilder2.setNotificationFlags(Notification.FLAG_AUTO_CANCEL);
+				cBuilder2.setNotificationDefaults(Notification.DEFAULT_SOUND
+						| Notification.DEFAULT_VIBRATE);
+				cBuilder2.setStatusbarIcon(R.drawable.bdpush_notify_icon_bg);
+				cBuilder2.setLayoutDrawable(R.drawable.bdpush_notify_icon_bg);
+				PushManager.setNotificationBuilder(mContext, 2, cBuilder2);
+			break;
+		default:
+			break;
+		}
+	}
+
 }

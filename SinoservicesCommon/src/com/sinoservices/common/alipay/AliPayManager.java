@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import com.alipay.sdk.app.PayTask;
+import com.sinoservices.common.push.BaiDuPushManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,11 +29,19 @@ import android.widget.Toast;
 public class AliPayManager {
 	Context context;
 	Handler mHandler;
+	private static AliPayManager aliPayManager;
 	
 	public AliPayManager(Context context, Handler mHandler) {
 		super();
 		this.context = context;
 		this.mHandler = mHandler;
+	}
+	
+	public static AliPayManager getInstance(Context context, Handler mHandler) {
+		if (aliPayManager == null) {
+			aliPayManager = new AliPayManager(context, mHandler);
+		}
+		return aliPayManager;
 	}
 
 	/**
@@ -94,7 +103,12 @@ public class AliPayManager {
 
 				Message msg = new Message();
 				msg.what = Constant.SDK_CHECK_FLAG;
-				msg.obj = isExist;
+				if (isExist) {
+					msg.obj = "该终端设备存在支付宝认证账户";
+				}else {
+					msg.obj = "该终端设备不存在支付宝认证账户";
+				}
+//				msg.obj = isExist;
 				mHandler.sendMessage(msg);
 			}
 		};

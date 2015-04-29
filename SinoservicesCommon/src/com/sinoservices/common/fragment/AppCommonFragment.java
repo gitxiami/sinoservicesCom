@@ -63,6 +63,13 @@ public class AppCommonFragment extends Fragment {
 		aliPayModule.setModulestatus("true");
 		aliPayModule.setModuleid(R.drawable.alipay_icon);
 		
+		// 高德地图模块实体
+		ModuleEntity gaodeMapModule = new ModuleEntity();
+		gaodeMapModule.setModulename("高德地图");
+		gaodeMapModule.setModuleurl("file:///android_asset/gaodemap.html");
+		gaodeMapModule.setModulestatus("true");
+		gaodeMapModule.setModuleid(R.drawable.gaodemap_icon);
+		
 		// 增加模块实体
 		ModuleEntity addModule = new ModuleEntity();
 		addModule.setModulename("添加应用");
@@ -70,10 +77,11 @@ public class AppCommonFragment extends Fragment {
 		addModule.setModulestatus("true");
 		addModule.setModuleid(R.drawable.item_add);
 		
-		allEntities.add(baiduPushModule);
-		allEntities.add(wxPayModule);
-		allEntities.add(aliPayModule);
-		allEntities.add(addModule);
+		allEntities.add(baiduPushModule);	// 百度推送模块实体
+		allEntities.add(wxPayModule);		// 微信支付模块实体
+		allEntities.add(aliPayModule);		// 支付宝支付模块实体
+		allEntities.add(gaodeMapModule);	// 高德地图模块实体
+		allEntities.add(addModule);			// 增加模块实体
 		
 		//准备要添加的数据条目 
         List<Map<String, Object>> items = new ArrayList<Map<String,Object>>(); 

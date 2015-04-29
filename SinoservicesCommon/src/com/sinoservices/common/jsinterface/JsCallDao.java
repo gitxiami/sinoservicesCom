@@ -19,14 +19,16 @@ public interface JsCallDao {
 	public void openRichMediaList();
 
 	/** 设置标签 **/
-	public void setTags(List<String> tags);
+	public void setTags();
 
 	/** 删除标签 **/
-	public void delTags(List<String> tags);
+	public void delTags();
 
 	/** 选择推送样式 **/
 	public void choosePushStyle();
-
+    
+	/**设置推送时间范围**/
+	public void setNoDisturbPushTime();
 	/** ==================百度推送end======================= **/
 
 	/** ==================支付宝支付======================= **/
@@ -37,7 +39,7 @@ public interface JsCallDao {
 	 * check whether the device has authentication alipay account.
 	 * 查询终端设备是否存在支付宝认证账户
 	 */
-	public void check(View v);
+	public void check();
 
 	/* get the sdk version. 获取SDK版本号 */
 	public void getSDKVersion();
