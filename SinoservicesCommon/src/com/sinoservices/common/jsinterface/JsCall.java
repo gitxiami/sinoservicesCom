@@ -12,9 +12,16 @@ import com.alipay.sdk.app.PayTask;
 import com.sinoservices.common.alipay.Constant;
 import com.sinoservices.common.alipay.SignUtils;
 import com.sinoservices.common.push.BaiDuPushManager;
+import com.sinoservices.gaodemap.activity.GeocoderActivity;
+import com.sinoservices.gaodemap.activity.LocationActivity;
+import com.sinoservices.gaodemap.activity.NaviActivity;
+import com.sinoservices.gaodemap.activity.OfflineActivity;
+import com.sinoservices.gaodemap.activity.PoiAroundSearchActivity;
+import com.sinoservices.gaodemap.activity.PoiKeywordSearchActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -263,4 +270,36 @@ public class JsCall implements JsCallDao {
 	}
 	
 	/** ==================支付宝支付end=======================**/
+	/** =====================高德地图=========================== **/
+	/* 定位 */
+	public void location(){
+		Intent intent=new Intent(context,LocationActivity.class);
+		context.startActivity(intent);
+	}
+	/* 导航 */
+	public void navi(){
+		Intent intent=new Intent(context,NaviActivity.class);
+		context.startActivity(intent);
+	}
+	/* 地理编码 */
+	public void geocoder(){
+		Intent intent=new Intent(context,GeocoderActivity.class);
+		context.startActivity(intent);
+	}
+	/* 关键字搜索 */
+	public void poikeyword(){
+		Intent intent=new Intent(context,PoiKeywordSearchActivity.class);
+		context.startActivity(intent);
+	}
+	/* 周边搜索 */
+	public void poiaround(){
+		Intent intent=new Intent(context,PoiAroundSearchActivity.class);
+		context.startActivity(intent);
+	}
+	/* 离线地图 */
+	public void offlinemap(){
+		Intent intent=new Intent(context,OfflineActivity.class);
+		context.startActivity(intent);
+	}
+	/** =====================高德地图end=========================== **/
 }
