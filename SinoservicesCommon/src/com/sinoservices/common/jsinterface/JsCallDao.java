@@ -19,14 +19,16 @@ public interface JsCallDao {
 	public void openRichMediaList();
 
 	/** 设置标签 **/
-	public void setTags(List<String> tags);
+	public void setTags();
 
 	/** 删除标签 **/
-	public void delTags(List<String> tags);
+	public void delTags();
 
 	/** 选择推送样式 **/
 	public void choosePushStyle();
-
+    
+	/**设置推送时间范围**/
+	public void setNoDisturbPushTime();
 	/** ==================百度推送end======================= **/
 
 	/** ==================支付宝支付======================= **/
