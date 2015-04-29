@@ -55,5 +55,20 @@ public interface JsCallDao {
 
 	/* get the sign type we use. 获取签名方式 */
 	public String getSignType();
+
 	/** ==================支付宝支付end======================= **/
+	/** =====================高德地图=========================== **/
+	/* 定位 */
+	public void location();
+	/* 导航 */
+	public void navi();
+	/* 地理编码 */
+	public void geocoder();
+	/* 关键字搜索 */
+	public void poikeyword();
+	/* 周边搜索 */
+	public void poiaround();
+	/* 离线地图 */
+	public void offlinemap();
+	/** =====================高德地图end=========================== **/
 }
