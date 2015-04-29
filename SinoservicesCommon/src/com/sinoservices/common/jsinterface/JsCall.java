@@ -10,7 +10,6 @@ import com.sinoservices.gaodemap.activity.NaviActivity;
 import com.sinoservices.gaodemap.activity.OfflineActivity;
 import com.sinoservices.gaodemap.activity.PoiAroundSearchActivity;
 import com.sinoservices.gaodemap.activity.PoiKeywordSearchActivity;
-
 import android.app.Activity;
 import com.sinoservices.common.push.bdPushUtil;
 import android.app.AlertDialog;
@@ -129,6 +128,7 @@ public class JsCall implements JsCallDao {
 				dialog.dismiss();
 			}
 		});
+		builder.show();
 //		baiDuPushManager = BaiDuPushManager.getInstance(context);
 //		baiDuPushManager.choosePushStyle(0);
 	}
@@ -138,10 +138,10 @@ public class JsCall implements JsCallDao {
 	public void openClosePush(String status) {
 		// 百度推送状态切换
 		System.out.println("百度推送状态切换");
-		if(status!=null&&status.equals("1")){
+		if (status != null && status.equals("1")) {
 			baiDuPushManager.initWithApiKey();
-		}else if(status!=null&&status.equals("0")){
-			baiDuPushManager.StopBaiDuPush();			
+		} else if (status != null && status.equals("0")) {
+			baiDuPushManager.StopBaiDuPush();
 		}
 	}
 
@@ -273,35 +273,42 @@ public class JsCall implements JsCallDao {
 	
 	/** ==================支付宝支付end=======================**/
 	/** =====================高德地图=========================== **/
+	@JavascriptInterface
 	/* 定位 */
 	public void location(){
 		Intent intent=new Intent(context,LocationActivity.class);
 		context.startActivity(intent);
 	}
+	@JavascriptInterface
 	/* 导航 */
 	public void navi(){
 		Intent intent=new Intent(context,NaviActivity.class);
 		context.startActivity(intent);
 	}
+	@JavascriptInterface
 	/* 地理编码 */
 	public void geocoder(){
 		Intent intent=new Intent(context,GeocoderActivity.class);
 		context.startActivity(intent);
 	}
+	@JavascriptInterface
 	/* 关键字搜索 */
 	public void poikeyword(){
 		Intent intent=new Intent(context,PoiKeywordSearchActivity.class);
 		context.startActivity(intent);
 	}
+	@JavascriptInterface
 	/* 周边搜索 */
 	public void poiaround(){
 		Intent intent=new Intent(context,PoiAroundSearchActivity.class);
 		context.startActivity(intent);
 	}
+	@JavascriptInterface
 	/* 离线地图 */
 	public void offlinemap(){
 		Intent intent=new Intent(context,OfflineActivity.class);
 		context.startActivity(intent);
 	}
 	/** =====================高德地图end=========================== **/
+
 }

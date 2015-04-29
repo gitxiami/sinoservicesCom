@@ -110,7 +110,6 @@ public class BaiDuPushManager {
 	public static void StopBaiDuPush(){
 		PushManager.stopWork(mContext);
 	}
-
     /**
      * @Title: setNoDisturbPushTime 
      * @Description: 设置免打扰时间
@@ -165,5 +164,4 @@ public class BaiDuPushManager {
 			break;
 		}
 	}
-
 }
