@@ -103,6 +103,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	@Override
 	public void check() {
+		aliPayManager = AliPayManager.getInstance(context, mHandler);
 		aliPayManager.check();
 	}
 

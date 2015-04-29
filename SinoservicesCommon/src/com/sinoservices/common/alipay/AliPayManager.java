@@ -72,12 +72,6 @@ public class AliPayManager {
 				// 构造PayTask 对象
 				PayTask alipay = new PayTask((Activity) context);
 				// 调用支付接口，获取支付结果
-//				if (alipay == null) {
-//					System.out.println("alipay is null");
-//				}
-//				if (payInfo == null) {
-//					System.out.println("payInfo is null");
-//				}
 				String result = alipay.pay(payInfo);
 
 				Message msg = new Message();
@@ -109,7 +103,12 @@ public class AliPayManager {
 
 				Message msg = new Message();
 				msg.what = Constant.SDK_CHECK_FLAG;
-				msg.obj = isExist;
+				if (isExist) {
+					msg.obj = "该终端设备存在支付宝认证账户";
+				}else {
+					msg.obj = "该终端设备不存在支付宝认证账户";
+				}
+//				msg.obj = isExist;
 				mHandler.sendMessage(msg);
 			}
 		};
