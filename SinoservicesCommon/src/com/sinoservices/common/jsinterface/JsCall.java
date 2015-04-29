@@ -120,6 +120,7 @@ public class JsCall implements JsCallDao {
 				dialog.dismiss();
 			}
 		});
+		builder.show();
 //		baiDuPushManager = BaiDuPushManager.getInstance(context);
 //		baiDuPushManager.choosePushStyle(0);
 	}
