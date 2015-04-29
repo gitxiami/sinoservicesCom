@@ -11,30 +11,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="#ffffff"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:padding="10dp" 
+        >
 
         <Button
             android:id="@+id/bt_app_common"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="常用应用" />
+            android:background="@drawable/left_btn_bg"
+            android:text="常用应用"
+            android:layout_gravity="center"
+            android:textColor="#0289DF" />
 
         <Button
             android:id="@+id/bt_app_store"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="45dp"
             android:layout_marginLeft="-8dp"
-            android:text="应用商店" />
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/right_btn_bg"
+            android:text="应用商店"
+            android:textColor="#0289DF" />
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#EEEEEE" />
-    
+
     <FrameLayout
         android:id="@+id/app_fragment"
         android:layout_width="match_parent"

@@ -37,7 +37,7 @@ public interface JsCallDao {
 	 * check whether the device has authentication alipay account.
 	 * 查询终端设备是否存在支付宝认证账户
 	 */
-	public void check(View v);
+	public void check();
 
 	/* get the sdk version. 获取SDK版本号 */
 	public void getSDKVersion();

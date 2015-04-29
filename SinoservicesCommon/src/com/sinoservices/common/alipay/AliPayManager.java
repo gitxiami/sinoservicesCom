@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import com.alipay.sdk.app.PayTask;
+import com.sinoservices.common.push.BaiDuPushManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,11 +29,19 @@ import android.widget.Toast;
 public class AliPayManager {
 	Context context;
 	Handler mHandler;
+	private static AliPayManager aliPayManager;
 	
 	public AliPayManager(Context context, Handler mHandler) {
 		super();
 		this.context = context;
 		this.mHandler = mHandler;
+	}
+	
+	public static AliPayManager getInstance(Context context, Handler mHandler) {
+		if (aliPayManager == null) {
+			aliPayManager = new AliPayManager(context, mHandler);
+		}
+		return aliPayManager;
 	}
 
 	/**
@@ -63,6 +72,12 @@ public class AliPayManager {
 				// 构造PayTask 对象
 				PayTask alipay = new PayTask((Activity) context);
 				// 调用支付接口，获取支付结果
+//				if (alipay == null) {
+//					System.out.println("alipay is null");
+//				}
+//				if (payInfo == null) {
+//					System.out.println("payInfo is null");
+//				}
 				String result = alipay.pay(payInfo);
 
 				Message msg = new Message();

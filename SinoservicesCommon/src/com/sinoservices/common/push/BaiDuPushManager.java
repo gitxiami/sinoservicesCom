@@ -61,7 +61,7 @@ public class BaiDuPushManager {
 	 * Push: 无账号初始化，用api key绑定
 	 * 无账号登陆
 	 */
-	private static void initWithApiKey() {
+	public static void initWithApiKey() {
 		PushManager.startWork(mContext, PushConstants.LOGIN_TYPE_API_KEY,
 				Global.BAIDU_PUSH_API);
 	}
@@ -82,7 +82,7 @@ public class BaiDuPushManager {
 	/**
 	 * 设置标签,以英文逗号隔开
 	 */
-	private static void setTags(List<String> tags) {
+	public static void setTags(List<String> tags) {
 		// Push: 设置tag调用方式
 		PushManager.setTags(mContext, tags);
 	}
@@ -90,15 +90,24 @@ public class BaiDuPushManager {
 	/**
 	 * 删除tag操作
 	 */
-	private static void deleteTags(List<String> tags) {
+	public static void deleteTags(List<String> tags) {
 		PushManager.delTags(mContext, tags);
 	}
     /**
      * 以百度账号登陆
      * @param accessToken
      */
-	private static void LoginByBaiDu(String accessToken) {
+	public static void LoginByBaiDu(String accessToken) {
 		PushManager.startWork(mContext, PushConstants.LOGIN_TYPE_ACCESS_TOKEN,
 				accessToken);
+	}
+	/**
+	 * @Title: StopBaiDuPush 
+	 * @Description: 停止
+	 * @return void 
+	 * @throws
+	 */
+	public static void StopBaiDuPush(){
+		PushManager.stopWork(mContext);
 	}
 }
