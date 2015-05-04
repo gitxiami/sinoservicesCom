@@ -8,6 +8,7 @@ import java.util.Map;
 import com.sinoservices.common.R;
 import com.sinoservices.common.activity.ModuleWebActivity;
 import com.sinoservices.common.entity.ModuleEntity;
+import com.sinoservices.common.ring.activity.HycoWearableMainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,6 +64,13 @@ public class AppCommonFragment extends Fragment {
 		aliPayModule.setModulestatus("true");
 		aliPayModule.setModuleid(R.drawable.alipay_icon);
 		
+		// 浩创指环王模块实体
+		ModuleEntity hycoWearableModule = new ModuleEntity();
+		hycoWearableModule.setModulename("指环王");
+		hycoWearableModule.setModuleurl("local");
+		hycoWearableModule.setModulestatus("true");
+		hycoWearableModule.setModuleid(R.drawable.hyco_icon);
+		
 		// 高德地图模块实体
 		ModuleEntity gaodeMapModule = new ModuleEntity();
 		gaodeMapModule.setModulename("高德地图");
@@ -80,6 +88,7 @@ public class AppCommonFragment extends Fragment {
 		allEntities.add(baiduPushModule);	// 百度推送模块实体
 		allEntities.add(wxPayModule);		// 微信支付模块实体
 		allEntities.add(aliPayModule);		// 支付宝支付模块实体
+		allEntities.add(hycoWearableModule);// 浩创指环王模块实体
 		allEntities.add(gaodeMapModule);	// 高德地图模块实体
 		allEntities.add(addModule);			// 增加模块实体
 		
@@ -111,9 +120,13 @@ public class AppCommonFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Toast.makeText(getActivity(), ""+position, 0).show();
-				Intent intent=new Intent(getActivity(), ModuleWebActivity.class);
-//				Intent intent=new Intent(getActivity(), PayDemoActivity.class);
-				intent.putExtra("ModuleEntity", displayEntities.get(position));
+				Intent intent;
+				if (displayEntities.get(position).getModulename().equals("指环王")) {		// 指环王
+					intent = new Intent(getActivity(), HycoWearableMainActivity.class);
+				} else {
+					intent = new Intent(getActivity(), ModuleWebActivity.class);
+					intent.putExtra("ModuleEntity", displayEntities.get(position));
+				}
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			}
