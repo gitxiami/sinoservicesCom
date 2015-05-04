@@ -19,6 +19,7 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
+import com.amap.api.maps.LocationSource.OnLocationChangedListener;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.Marker;
@@ -38,18 +39,13 @@ import com.sinoservices.gaodemap.util.OffLineMapUtils;
 import com.sinoservices.gaodemap.util.ToastUtil;
 
 public class LocationActivity extends Activity implements LocationSource,
-		AMapLocationListener, OnGeocodeSearchListener {
+		AMapLocationListener {
 	private AMap aMap;
 	private MapView mapView;
 	private OnLocationChangedListener mListener;
 	private LocationManagerProxy mAMapLocationManager;
-	private GeocodeSearch geocoderSearch;
-	private LatLonPoint latLonPoint;
-	private String addressName;
-	private String name;
 	private Marker locationMarker;// 定位雷达小图标
 	private ProgressDialog progDialog = null;
-	private String city;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +67,11 @@ public class LocationActivity extends Activity implements LocationSource,
 							.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 			setUpMap();
 		}
-		geocoderSearch = new GeocodeSearch(this);
-		geocoderSearch.setOnGeocodeSearchListener(this);
+		// geocoderSearch = new GeocodeSearch(this);
+		// geocoderSearch.setOnGeocodeSearchListener(this);
 		progDialog = new ProgressDialog(this);
 		// getAddress(latLonPoint);
-		getLatlon(name);
+		// getLatlon(name);
 	}
 
 	private void setUpMap() {
@@ -178,104 +174,106 @@ public class LocationActivity extends Activity implements LocationSource,
 						+ amapLocation.getAMapException().getErrorCode());
 			}
 		}
-		name = amapLocation.getAddress();
-		latLonPoint = new LatLonPoint(amapLocation.getLatitude(),
-				amapLocation.getLongitude());
+		// name = amapLocation.getAddress();
+		// latLonPoint = new LatLonPoint(amapLocation.getLatitude(),
+		// amapLocation.getLongitude());
 	}
 
-	@Override
-	public void onGeocodeSearched(GeocodeResult result, int rCode) {
-		dismissDialog();
-		if (rCode == 0) {
-			if (result != null && result.getGeocodeAddressList() != null
-					&& result.getGeocodeAddressList().size() > 0) {
-				GeocodeAddress address = result.getGeocodeAddressList().get(0);
-				aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-						AMapUtil.convertToLatLng(address.getLatLonPoint()), 15));
-				locationMarker.setPosition(AMapUtil.convertToLatLng(address
-						.getLatLonPoint()));
-				addressName = "经纬度值:" + address.getLatLonPoint() + "\n位置描述:"
-						+ address.getFormatAddress();
-				ToastUtil.show(LocationActivity.this, addressName);
-			} else {
-				ToastUtil.show(LocationActivity.this, R.string.no_result);
-			}
-		} else if (rCode == 27) {
-			ToastUtil.show(LocationActivity.this, R.string.error_network);
-		} else if (rCode == 32) {
-			ToastUtil.show(LocationActivity.this, R.string.error_key);
-		} else {
-			ToastUtil.show(LocationActivity.this,
-					getString(R.string.error_other) + rCode);
-		}
-	}
+	// @Override
+	// public void onGeocodeSearched(GeocodeResult result, int rCode) {
+	// dismissDialog();
+	// if (rCode == 0) {
+	// if (result != null && result.getGeocodeAddressList() != null
+	// && result.getGeocodeAddressList().size() > 0) {
+	// GeocodeAddress address = result.getGeocodeAddressList().get(0);
+	// aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+	// AMapUtil.convertToLatLng(address.getLatLonPoint()), 15));
+	// locationMarker.setPosition(AMapUtil.convertToLatLng(address
+	// .getLatLonPoint()));
+	// addressName = "经纬度值:" + address.getLatLonPoint() + "\n位置描述:"
+	// + address.getFormatAddress();
+	// ToastUtil.show(LocationActivity.this, addressName);
+	// } else {
+	// ToastUtil.show(LocationActivity.this, R.string.no_result);
+	// }
+	// } else if (rCode == 27) {
+	// ToastUtil.show(LocationActivity.this, R.string.error_network);
+	// } else if (rCode == 32) {
+	// ToastUtil.show(LocationActivity.this, R.string.error_key);
+	// } else {
+	// ToastUtil.show(LocationActivity.this,
+	// getString(R.string.error_other) + rCode);
+	// }
+	// }
+	//
+	// @Override
+	// public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
+	// dismissDialog();
+	// if (rCode == 0) {
+	// if (result != null && result.getRegeocodeAddress() != null
+	// && result.getRegeocodeAddress().getFormatAddress() != null) {
+	// city = result.getRegeocodeAddress().getCity();
+	// addressName = "经纬度值:" + result.getRegeocodeQuery().getPoint()
+	// + "\n位置描述:"
+	// + result.getRegeocodeAddress().getFormatAddress();
+	// aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+	// AMapUtil.convertToLatLng(latLonPoint), 15));
+	// locationMarker.setPosition(AMapUtil
+	// .convertToLatLng(latLonPoint));
+	// ToastUtil.show(LocationActivity.this, addressName);
+	// } else {
+	// ToastUtil.show(LocationActivity.this, R.string.no_result);
+	// }
+	// } else if (rCode == 27) {
+	// ToastUtil.show(LocationActivity.this, R.string.error_network);
+	// } else if (rCode == 32) {
+	// ToastUtil.show(LocationActivity.this, R.string.error_key);
+	// } else {
+	// ToastUtil.show(LocationActivity.this,
+	// getString(R.string.error_other) + rCode);
+	// }
+	// }
 
-	@Override
-	public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
-		dismissDialog();
-		if (rCode == 0) {
-			if (result != null && result.getRegeocodeAddress() != null
-					&& result.getRegeocodeAddress().getFormatAddress() != null) {
-				city = result.getRegeocodeAddress().getCity();
-				addressName = "经纬度值:" + result.getRegeocodeQuery().getPoint()
-						+ "\n位置描述:"
-						+ result.getRegeocodeAddress().getFormatAddress();
-				aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-						AMapUtil.convertToLatLng(latLonPoint), 15));
-				locationMarker.setPosition(AMapUtil
-						.convertToLatLng(latLonPoint));
-				ToastUtil.show(LocationActivity.this, addressName);
-			} else {
-				ToastUtil.show(LocationActivity.this, R.string.no_result);
-			}
-		} else if (rCode == 27) {
-			ToastUtil.show(LocationActivity.this, R.string.error_network);
-		} else if (rCode == 32) {
-			ToastUtil.show(LocationActivity.this, R.string.error_key);
-		} else {
-			ToastUtil.show(LocationActivity.this,
-					getString(R.string.error_other) + rCode);
-		}
-	}
+	// /**
+	// * 显示进度条对话框
+	// */
+	// public void showDialog() {
+	// progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	// progDialog.setIndeterminate(false);
+	// progDialog.setCancelable(true);
+	// progDialog.setMessage("正在获取地址");
+	// progDialog.show();
+	// }
+	//
+	// /**
+	// * 隐藏进度条对话框
+	// */
+	// public void dismissDialog() {
+	// if (progDialog != null) {
+	// progDialog.dismiss();
+	// }
+	// }
 
-	/**
-	 * 显示进度条对话框
-	 */
-	public void showDialog() {
-		progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		progDialog.setIndeterminate(false);
-		progDialog.setCancelable(true);
-		progDialog.setMessage("正在获取地址");
-		progDialog.show();
-	}
-
-	/**
-	 * 隐藏进度条对话框
-	 */
-	public void dismissDialog() {
-		if (progDialog != null) {
-			progDialog.dismiss();
-		}
-	}
-
-	/**
-	 * 响应地理编码
-	 */
-	public void getLatlon(final String name) {
-		showDialog();
-
-		GeocodeQuery query = new GeocodeQuery(name, city);// 第一个参数表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode，
-		geocoderSearch.getFromLocationNameAsyn(query);// 设置同步地理编码请求
-	}
-
-	/**
-	 * 响应逆地理编码
-	 */
-	public void getAddress(final LatLonPoint latLonPoint) {
-		showDialog();
-		RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,
-				GeocodeSearch.AMAP);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
-		geocoderSearch.getFromLocationAsyn(query);// 设置同步逆地理编码请求
-	}
+	// /**
+	// * 响应地理编码
+	// */
+	// public void getLatlon(final String name) {
+	// showDialog();
+	//
+	// GeocodeQuery query = new GeocodeQuery(name, city);//
+	// 第一个参数表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode，
+	// geocoderSearch.getFromLocationNameAsyn(query);// 设置同步地理编码请求
+	// }
+	//
+	// /**
+	// * 响应逆地理编码
+	// */
+	// public void getAddress(final LatLonPoint latLonPoint) {
+	// showDialog();
+	// RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,
+	// GeocodeSearch.AMAP);//
+	// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+	// geocoderSearch.getFromLocationAsyn(query);// 设置同步逆地理编码请求
+	// }
 
 }

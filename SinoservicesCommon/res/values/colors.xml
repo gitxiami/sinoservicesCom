@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="title_bar_bg_color">#0289DF</color>
     <color name="main_bottom_tv_bg_color">#A4A4A6</color>
     <color name="main_bottom_tv_select_bg_color">#45C01A</color>
     <color name="app_fragment_button_color">#0289DF</color>
+    <color name="grey"> #ebebeb</color>
+    <color name="black"> #000000</color>
+    <color name="darkgrey"> #C0C0C0</color>
+    <color name="white"> #FFFFFF</color>
+    <color name="red"> #FF0000</color>
+    <color name="darkyellow"> #FFCC33</color>
+
 </resources>
