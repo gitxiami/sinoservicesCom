@@ -4,6 +4,7 @@ import com.sinoservices.common.R;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * @ClassName: ApppFragment
+ * @ClassName: AppFragment
  * @Description: 应用页面
  * @author Felix
  * @date 2015年4月27日 上午9:00:00
@@ -28,12 +29,19 @@ public class AppFragment extends Fragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_app, container, false);
 		
+		return view;
+	}
+	
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
 		appCommonBt = (Button) view.findViewById(R.id.bt_app_common);
 		appStoreBt = (Button) view.findViewById(R.id.bt_app_store);
 		
 		setDefaultBtBackground();
-		appCommonBt.setBackgroundResource(R.drawable.left_btn_select_bg);
 		appCommonBt.setTextColor(Color.WHITE);
+		appCommonBt.setBackgroundResource(R.drawable.left_btn_select_bg);
 		changeFragment(new AppCommonFragment());
 		
 		appCommonBt.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +67,6 @@ public class AppFragment extends Fragment {
 				
 			}
 		});
-		
-		return view;
 	}
 	
 	private void setDefaultBtBackground() {

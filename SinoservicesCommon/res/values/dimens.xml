@@ -6,5 +6,7 @@
 
     
     <dimen name="main_bottom_iv_height_width">28dp</dimen>
+    
+    <dimen name="BasicTextSize">15dp</dimen>
         
 </resources>

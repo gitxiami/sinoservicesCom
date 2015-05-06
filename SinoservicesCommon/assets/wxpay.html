@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>wxpay.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="utf-8">
+   
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript">
+	
+	function wxGenPrePayOrder(body, price){
+		 window.jscall.wxGenPrePayOrder(body, price);
+	}
+	
+	function wxPay(){
+		 window.jscall.wxPay();
+	}
+	
+	</script>
+  </head>
+  
+  <body>
+	<table width="284" border="1" >
+  <caption>
+  商品详情
+  </caption>
+
+  <tr>
+    <td width="91">商品名称:</td>
+    <td id="goods_name" width="177">Three Kingdoms</td>
+  </tr>
+  <tr>
+    <td>商品价格:</td>
+    <td id="goods_price" >0.01元</td>
+  </tr>
+</table>
+<br/>
+    <input name="wxGenPrePayOrder" type="button" style="width: 140px; height: 51px" onClick="wxGenPrePayOrder('Three Kingdoms', '1')" value="生成预支付订单">
+    <!-- <input name="wxGenPrePayOrder" type="button" style="width: 140px; height: 51px" onClick="wxGenPrePayOrder('Three Kingdoms', '0.01元')" value="生成预支付订单"> -->
+    <input name="wxPay" type="button" style="width: 110px; height: 51px" onClick="wxPay()" value="微信支付 ">
+    <br/>
+  </body>
+</html>

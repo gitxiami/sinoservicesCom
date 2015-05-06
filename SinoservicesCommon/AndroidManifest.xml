@@ -45,12 +45,19 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     -->
     
+    <!-- wxpay permission -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+	<!--     
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	-->    
+ 
     <!-- BLE permission -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
     <uses-permission android:name="android.permission.BLUETOOTH" /> 
    	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-   	<!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
 	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+   	<!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
 
     <application
         android:name="com.sinoservices.common.App"
@@ -86,6 +93,20 @@
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <!-- alipay sdk end -->
+        
+        <!-- wxpay begin -->       
+        <activity
+            android:name="com.sinoservices.common.wxpay.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+        
+        <receiver
+            android:name="com.sinoservices.common.wxpay.util.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+        <!-- wxpay end -->
         
         <!-- gaodemap sdk begin -->
         <activity android:name="com.sinoservices.gaodemap.activity.GeocoderActivity" >

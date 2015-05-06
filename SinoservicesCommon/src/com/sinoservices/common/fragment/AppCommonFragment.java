@@ -20,10 +20,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 /**
- * @ClassName: ApppCommonFragment
+ * @ClassName: AppCommonFragment
  * @Description: 应用页面
  * @author Felix
  * @date 2015年4月27日 上午9:00:00
@@ -53,14 +52,15 @@ public class AppCommonFragment extends Fragment {
 		// 微信支付模块实体
 		ModuleEntity wxPayModule = new ModuleEntity();
 		wxPayModule.setModulename("微信支付");
-		wxPayModule.setModuleurl("http://commonserver.duapp.com/wxpay.jsp");
-		wxPayModule.setModulestatus("false");
+		wxPayModule.setModuleurl("file:///android_asset/wxpay.html");
+		wxPayModule.setModulestatus("true");
 		wxPayModule.setModuleid(R.drawable.wxpay_icon);
 		
 		// 支付宝支付模块实体
 		ModuleEntity aliPayModule = new ModuleEntity();
 		aliPayModule.setModulename("支付宝支付");
-		aliPayModule.setModuleurl("http://sinoserver.duapp.com/alipay.html");
+		aliPayModule.setModuleurl("file:///android_asset/alipay.html");
+//		aliPayModule.setModuleurl("http://sinoserver.duapp.com/alipay.html");
 		aliPayModule.setModulestatus("true");
 		aliPayModule.setModuleid(R.drawable.alipay_icon);
 		
@@ -123,7 +123,8 @@ public class AppCommonFragment extends Fragment {
 				Intent intent;
 				if (displayEntities.get(position).getModulename().equals("指环王")) {		// 指环王
 					intent = new Intent(getActivity(), HycoWearableMainActivity.class);
-				} else {
+				} 
+				else {
 					intent = new Intent(getActivity(), ModuleWebActivity.class);
 					intent.putExtra("ModuleEntity", displayEntities.get(position));
 				}

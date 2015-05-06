@@ -9,6 +9,9 @@
     <color name="title_bar_background">#0289DF</color><!--标题栏背景颜色 -->
     <color name="text_zone_background">#ffffff</color><!--正文背景颜色 -->
     
+    
+    <color name="navpage">#FFE1E8EB</color>
+    
     <color name="white">#FFFFFF</color><!--白色 -->
 	<color name="ivory">#FFFFF0</color><!--象牙色 -->
 	<color name="lightyellow">#FFFFE0</color><!--亮黄色-->

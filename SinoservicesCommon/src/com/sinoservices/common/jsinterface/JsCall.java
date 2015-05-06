@@ -10,8 +10,10 @@ import com.sinoservices.gaodemap.activity.NaviActivity;
 import com.sinoservices.gaodemap.activity.OfflineActivity;
 import com.sinoservices.gaodemap.activity.PoiAroundSearchActivity;
 import com.sinoservices.gaodemap.activity.PoiKeywordSearchActivity;
-import android.app.Activity;
 import com.sinoservices.common.push.bdPushUtil;
+import com.sinoservices.common.wxpay.util.WxPayManager;
+import com.tencent.mm.sdk.modelpay.PayReq;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +42,7 @@ public class JsCall implements JsCallDao {
 	Handler mHandler;
 	
 	private AliPayManager aliPayManager;
+	private WxPayManager wxPayManager = new WxPayManager(context);
 
 	public JsCall() {
 		super();
@@ -272,6 +275,30 @@ public class JsCall implements JsCallDao {
 	}
 	
 	/** ==================支付宝支付end=======================**/
+	
+	/** ==================微信支付======================= **/
+	@JavascriptInterface
+	@Override
+	/* 微信APP支付生成预支付订单 */
+	public void wxGenPrePayOrder(String body, String price) {
+		wxPayManager = WxPayManager.getInstance(context);
+		
+		WxPayManager.GetPrepayIdTask getPrepayId = wxPayManager.getGetPrepayIdTask();
+		getPrepayId.execute(body, price);
+	}
+
+	@JavascriptInterface
+	@Override
+	/* 调用微信支付 */
+	public void wxPay() {
+		wxPayManager = WxPayManager.getInstance(context);
+		
+		PayReq req = new PayReq();
+		wxPayManager.genPayReq(req);
+		wxPayManager.sendPayReq(req);
+	}
+	/** ==================微信支付end======================= **/
+	
 	/** =====================高德地图=========================== **/
 	@JavascriptInterface
 	/* 定位 */
@@ -310,5 +337,7 @@ public class JsCall implements JsCallDao {
 		context.startActivity(intent);
 	}
 	/** =====================高德地图end=========================== **/
+
+
 
 }
