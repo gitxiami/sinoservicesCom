@@ -124,7 +124,7 @@ public class AppCommonFragment extends Fragment {
 				if (displayEntities.get(position).getModulename().equals("指环王")) {		// 指环王
 					intent = new Intent(getActivity(), HycoWearableMainActivity.class);
 				} 
-				else {
+				 else {
 					intent = new Intent(getActivity(), ModuleWebActivity.class);
 					intent.putExtra("ModuleEntity", displayEntities.get(position));
 				}

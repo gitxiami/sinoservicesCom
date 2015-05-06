@@ -6,10 +6,10 @@ import com.sinoservices.common.alipay.AliPayManager;
 import com.sinoservices.common.push.BaiDuPushManager;
 import com.sinoservices.gaodemap.activity.GeocoderActivity;
 import com.sinoservices.gaodemap.activity.LocationActivity;
-import com.sinoservices.gaodemap.activity.NaviActivity;
 import com.sinoservices.gaodemap.activity.OfflineActivity;
 import com.sinoservices.gaodemap.activity.PoiAroundSearchActivity;
 import com.sinoservices.gaodemap.activity.PoiKeywordSearchActivity;
+import com.sinoservices.gaodemap.navi.NaviStartActivity;
 import com.sinoservices.common.push.bdPushUtil;
 import com.sinoservices.common.wxpay.util.WxPayManager;
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -309,7 +309,7 @@ public class JsCall implements JsCallDao {
 	@JavascriptInterface
 	/* µ¼º½ */
 	public void navi(){
-		Intent intent=new Intent(context,NaviActivity.class);
+		Intent intent=new Intent(context,NaviStartActivity.class);
 		context.startActivity(intent);
 	}
 	@JavascriptInterface

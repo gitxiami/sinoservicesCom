@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="title_bar_bg_color">#0289DF</color>
     <color name="main_bottom_tv_bg_color">#A4A4A6</color>
     <color name="main_bottom_tv_select_bg_color">#45C01A</color>
     <color name="app_fragment_button_color">#0289DF</color>
     
-    <color name="app_background">#708090</color><!--界面背景颜色 -->
     <color name="title_bar_background">#0289DF</color><!--标题栏背景颜色 -->
     <color name="text_zone_background">#ffffff</color><!--正文背景颜色 -->
     
@@ -158,4 +158,13 @@
 	<color name="darkblue">#00008B</color><!--暗蓝色 -->
 	<color name="navy">#000080</color><!--海军色 -->
 	<color name="black">#000000</color><!--黑色 -->
+    
+    <color name="app_background">#708090</color><!-- 界面背景颜色 -->
+    <!-- <color name="title_bar_background">#0289DF</color>标题栏背景颜色
+    <color name="text_zone_background">#ffffff</color>正文背景颜色 -->
+    
+    
+    <color name="darkyellow"> #FFCC33</color>
+    
+    
 </resources>
