@@ -1,4 +1,4 @@
-package com.sinoservices.common.wxpay.wxapi;
+package com.sinoservices.common.wxapi;
 
 import com.sinoservices.common.R;
 import com.sinoservices.common.wxpay.util.Constants;
