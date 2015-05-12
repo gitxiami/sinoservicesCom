@@ -243,9 +243,9 @@ public class MainActivity extends BaseActivity implements
 	/**点击加号执行的下来菜单显示**/
 	private void showRightMenuQuickActionBar(View view) {
 		QuickAction quickAction = new QuickAction(this, QuickAction.VERTICAL);	
-		quickAction.addActionItem(new ActionItem(0, "添加好友"));
-		quickAction.addActionItem(new ActionItem(1, "我扫一扫"));
-		quickAction.addActionItem(new ActionItem(2, "我搜一搜"));
+		quickAction.addActionItem(new ActionItem(0, "添加好友",getResources().getDrawable(R.drawable.add_item_icon1)));
+		quickAction.addActionItem(new ActionItem(1, "我扫一扫",getResources().getDrawable(R.drawable.add_item_icon1)));
+		quickAction.addActionItem(new ActionItem(2, "我搜一搜",getResources().getDrawable(R.drawable.add_item_icon1)));
 		quickAction.setOnActionItemClickListener(new OnActionItemClickListener() {
 			@Override
 			public void onItemClick(QuickAction source, int pos, int actionId) {
