@@ -7,6 +7,10 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -60,6 +64,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.sinoservices.common.activity.LoginActivity" >
+        </activity>
         <activity android:name="com.sinoservices.common.MainActivity" >
         </activity>
         <activity android:name="com.sinoservices.common.BaseActivity" >
@@ -106,6 +112,37 @@
         </activity>
         <!-- gaodemap sdk end -->
 
+        <activity
+            android:name="com.sinoservices.common.activity.ChatActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Default.SwipeBack.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name="com.sinoservices.common.activity.BaseActivity" />
+        <activity android:name="com.sinoservices.common.swipeback.SwipeBackActivity" />
+        <activity android:name="com.sinoservices.common.activity.APPGlobalSettingActivity" />
+        <activity android:name="com.sinoservices.common.activity.PersonDataActivity" />
+        <activity android:name="com.sinoservices.common.activity.SearchFriendActivity" />
+        <service android:name="com.sinoservices.common.service.XXService" />
+
+        <receiver android:name="com.sinoservices.common.XXBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.sinoservices.common.db.ChatProvider"
+            android:authorities="com.way.xx.provider.Chats" />
+        <provider
+            android:name="com.sinoservices.common.db.RosterProvider"
+            android:authorities="com.way.xx.provider.Roster" />
 
         <!-- ============================push富媒体，不使用富媒体推送不需要======================================= -->
         <activity

@@ -609,4 +609,8 @@ public class ResideMenu extends FrameLayout {
 		public void closeMenu();
 	}
 
+	public LinearLayout getLayoutSetting() {
+		return layoutSetting;
+	}
+
 }

@@ -22,4 +22,7 @@ public class Global {
     /**是否为调试模式 默认为true**/
     public static final boolean ISDEBUG=true;
     
+    /**xmpp服务器地址**/
+    public static final String XMPPSERVER="172.88.88.43";
+    
 }

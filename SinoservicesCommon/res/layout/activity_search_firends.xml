@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="#0189DF" >
+
+            <Button
+                android:id="@+id/persondata_back_btn"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/back_btn_bg"
+                android:textColor="#ffffff" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" 
+                android:background="@drawable/search_friends_et_bg">
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/search_friends_icon" />
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
+                    android:hint="请输入好友名称"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/search_firends_result_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>
