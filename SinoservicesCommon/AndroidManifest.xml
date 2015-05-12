@@ -86,6 +86,9 @@
         <activity android:name="com.sinoservices.common.activity.AssistantActivity" >
         </activity>
         <activity android:name="com.sinoservices.common.activity.ModuleWebActivity" >
+            <intent-filter>
+                <data android:scheme="wxf2f565574a968187"/>
+            </intent-filter>
         </activity>
         <activity android:name="com.sinoservices.common.ring.activity.HycoWearableMainActivity" />
         <activity android:name="com.sinoservices.common.ring.activity.BtSettingActivity" />
@@ -101,7 +104,7 @@
         
         <!-- wxpay begin -->       
         <activity
-            android:name="com.sinoservices.common.wxpay.wxapi.WXPayEntryActivity"
+            android:name="com.sinoservices.common.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"/>
         <receiver
