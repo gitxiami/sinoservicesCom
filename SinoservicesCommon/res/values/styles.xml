@@ -95,6 +95,7 @@
     <style name="CustomWindowTitleBackground">
         <item name="android:background">@null</item>
     </style>
+
     <style name="TextAppearanceSwitch" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">16.0sp</item>
@@ -102,6 +103,7 @@
         <item name="android:textColorHint">?android:textColorHint</item>
         <item name="android:textColorLink">?android:textColorLink</item>
     </style>
+
     <style name="switch_optimus" parent="android:Widget.CompoundButton">
         <item name="thumb">@drawable/switch_inner</item>
         <item name="track">@drawable/skin_switch_track</item>
@@ -137,6 +139,56 @@
 
     <style name="Default.SwipeBack.NoTitleBar" parent="@style/Default.SwipeBack">
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="title_bar_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- Navigation Header -->
+    <style name="NavPage">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!-- <item name="android:background">@drawable/nav_page</item> -->
+        <item name="android:background">@color/navpage</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/BasicTextSize</item>
+        <item name="android:textColor">#ff000000</item>
+    </style>
+
+    <style name="MMButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/mm_btn_text</item>
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:minWidth">40dp</item>
+    </style>
+
+    <style name="MMLineButton" parent="@style/MMButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/mm_style_two_btn_text</item>
+    </style>
+
+    <style name="MMLineActionButton" parent="@style/MMLineButton">
+        <item name="android:background">@drawable/btn_style_one</item>
+        <item name="android:textColor">@color/mm_style_one_btn_text</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDy">1.2</item>
+        <item name="android:shadowDx">1.2</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
 </resources>

@@ -1,8 +1,5 @@
 <resources>
-
     <!-- Default screen margins, per the Android Design guidelines. -->
-
-
     <!-- 高德地图     start -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -124,5 +121,5 @@
     <dimen name="phone_country_code_width">115.0dip</dimen>
     <dimen name="phone_country_code_padding">6.0dip</dimen>
     <!-- end -->
-
+    <dimen name="BasicTextSize">15dp</dimen>
 </resources>

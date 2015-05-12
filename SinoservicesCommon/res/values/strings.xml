@@ -134,4 +134,72 @@
     <string name="textOff">"    "</string>
     <!-- end -->
 
+    <!-- BLE -->
+    <string name="activity_main_title">指环王连接测试(演示版)</string>
+    <string name="app_exit">oh，崩溃了，遇到不可抗拒的因素~~</string>
+	<string name="bluetooth_poweron">On</string>
+    <string name="bluetooth_poweroff">Off</string>
+    <string name="bluetooth_switch">On/Off</string>
+    <string name="bluetooth_search">Search</string>
+    <string name="searching">Searching</string>
+    <string name="bluetooth_listen">Listen</string>
+    <string name="not_support_bluetooth">"Sorroy,Don't support bluetooth!"</string>
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="bluetooth_enabled">already start BT</string>
+    <string name="bluetooth_enabling">is starting up BT</string>
+    <string name="bluetooth_disabled">already powered off</string>
+    <string name="bluetooth_disabling">is powering off</string>
+    <string name="input_string_hint">Please input text</string>
+    <string name="power_on_first">Please power on device first</string>
+    <string name="not_support_bt">"This device don't support BT!"</string>
+    <string name="send">Send</string>
+    <string name="start_communicate_error">Start Communicate error</string>
+    <string name="connect_first">Please connect first!</string>
+    <string name="string_empty">String is empty,please input string first!</string>
+    <string name="unknow_myself_device">unknow myself information!</string>
+    <string name="disconnect_bt">disconncet</string>
+    <string name="connect_bt">conncet</string>
+    <string name="clear_tx_history">clear tx</string>
+    <string name="clear_rx_history">clear rx</string>
+    <string name="connected_bt">connected BT:</string>
+    <string name="no_connect_bt">No BT connect</string>
+    <string name="receive_histoy">receive history:</string>
+    <string name="send_histoy">send history:</string>
+    <string name="clear">clear</string>
+    <string name="listening">listening&#8230;</string>
+    <string name="listen_failed">listen fail!</string>
+    <string name="listen_connected">listen connected!</string>
+    <string name="switch_activity">switch</string>
+    <string name="btn_green">green</string>
+    <string name="btn_yellow">yellow</string>
+    <string name="btn_red">red</string>
+    <string name="connect_exception">connect exception</string>
+    <string name="paired">paired</string>
+    <string name="unpaired">unpaired</string>
+    <string name="pairing">pairing</string>
+    <string name="listen_first">BT is connected by others devices,you must listen first!</string>
+    
+    <!-- WXPayEntryActivity -->
+	<string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
+	<string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+	
+	<!-- PayActivity -->
+	<string name="unifiedorder_v3_wx">APP支付生成预支付订单</string>
+	<string name="pay__pre_by_wxap">生成APP微信支付参数</string>
+
+	<string name="pay_by_wxap">调起微信支付</string>
+	<string name="check_pay">检查微信版本是否支持支付</string>
+	<string name="input_reqkey">输入reqkey</string>
+	<string name="input_package_value">输入package value</string>
+	<string name="input_sign">输入sign</string>
+	<string name="getting_access_token">正在获取access token...</string>
+	<string name="get_access_token_succ">获取access token成功</string>
+	<string name="get_access_token_fail" formatted="false">获取access token失败，原因%s</string>
+	<string name="getting_prepayid">正在获取预支付订单...</string>
+	<string name="paying">支付中</string>
+	<string name="get_prepayid_succ">获取prepayid成功</string>
+	<string name="get_prepayid_fail" formatted="false">获取prepayid失败，原因%s</string>
+	<string name="pay_by_wx_title">通过微信支付</string>
+	<string name="app_tip">提示</string>
+    
 </resources>

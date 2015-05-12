@@ -8,6 +8,7 @@ import java.util.Map;
 import com.sinoservices.common.R;
 import com.sinoservices.common.activity.ModuleWebActivity;
 import com.sinoservices.common.entity.ModuleEntity;
+import com.sinoservices.common.ring.activity.HycoWearableMainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +20,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 /**
- * @ClassName: ApppCommonFragment
+ * @ClassName: AppCommonFragment
  * @Description: 应用页面
  * @author Felix
  * @date 2015年4月27日 上午9:00:00
@@ -52,16 +52,24 @@ public class AppCommonFragment extends Fragment {
 		// 微信支付模块实体
 		ModuleEntity wxPayModule = new ModuleEntity();
 		wxPayModule.setModulename("微信支付");
-		wxPayModule.setModuleurl("http://commonserver.duapp.com/wxpay.jsp");
-		wxPayModule.setModulestatus("false");
+		wxPayModule.setModuleurl("file:///android_asset/wxpay.html");
+		wxPayModule.setModulestatus("true");
 		wxPayModule.setModuleid(R.drawable.wxpay_icon);
 		
 		// 支付宝支付模块实体
 		ModuleEntity aliPayModule = new ModuleEntity();
 		aliPayModule.setModulename("支付宝支付");
-		aliPayModule.setModuleurl("http://sinoserver.duapp.com/alipay.html");
+		aliPayModule.setModuleurl("file:///android_asset/alipay.html");
+//		aliPayModule.setModuleurl("http://sinoserver.duapp.com/alipay.html");
 		aliPayModule.setModulestatus("true");
 		aliPayModule.setModuleid(R.drawable.alipay_icon);
+		
+		// 浩创指环王模块实体
+		ModuleEntity hycoWearableModule = new ModuleEntity();
+		hycoWearableModule.setModulename("指环王");
+		hycoWearableModule.setModuleurl("local");
+		hycoWearableModule.setModulestatus("true");
+		hycoWearableModule.setModuleid(R.drawable.hyco_icon);
 		
 		// 高德地图模块实体
 		ModuleEntity gaodeMapModule = new ModuleEntity();
@@ -80,6 +88,7 @@ public class AppCommonFragment extends Fragment {
 		allEntities.add(baiduPushModule);	// 百度推送模块实体
 		allEntities.add(wxPayModule);		// 微信支付模块实体
 		allEntities.add(aliPayModule);		// 支付宝支付模块实体
+		allEntities.add(hycoWearableModule);// 浩创指环王模块实体
 		allEntities.add(gaodeMapModule);	// 高德地图模块实体
 		allEntities.add(addModule);			// 增加模块实体
 		
@@ -111,9 +120,14 @@ public class AppCommonFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Toast.makeText(getActivity(), ""+position, 0).show();
-				Intent intent=new Intent(getActivity(), ModuleWebActivity.class);
-//				Intent intent=new Intent(getActivity(), PayDemoActivity.class);
-				intent.putExtra("ModuleEntity", displayEntities.get(position));
+				Intent intent;
+				if (displayEntities.get(position).getModulename().equals("指环王")) {		// 指环王
+					intent = new Intent(getActivity(), HycoWearableMainActivity.class);
+				} 
+				 else {
+					intent = new Intent(getActivity(), ModuleWebActivity.class);
+					intent.putExtra("ModuleEntity", displayEntities.get(position));
+				}
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			}

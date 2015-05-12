@@ -57,6 +57,16 @@ public interface JsCallDao {
 	public String getSignType();
 
 	/** ==================支付宝支付end======================= **/
+	
+	/** ==================微信支付======================= **/
+	
+	/* 微信APP支付生成预支付订单 */
+	public void wxGenPrePayOrder(String body, String price);
+	
+	/* 调用微信支付 */
+	public void wxPay();
+	/** ==================微信支付end======================= **/
+	
 	/** =====================高德地图=========================== **/
 	/* 定位 */
 	public void location();

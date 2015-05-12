@@ -4,5 +4,8 @@
         android:drawable="@drawable/left_btn_select_bg"/>  
     <item android:state_focused="true"  
         android:drawable="@drawable/left_btn_select_bg" />  
-    <item android:drawable="@drawable/left_btn_nor_bg" />  
+    <item android:state_enabled="true"  
+        android:drawable="@drawable/left_btn_select_bg" /> 
+    <item android:state_enabled="false"
+        android:drawable="@drawable/left_btn_nor_bg" />  
 </selector>  

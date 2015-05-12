@@ -8,5 +8,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/alipay/alipaysdk.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/alipay/alipaysecsdk.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/alipay/alipayutdid.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/wxpay/libammsdk.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -23,6 +23,6 @@ public class Global {
     public static final boolean ISDEBUG=true;
     
     /**xmpp·þÎñÆ÷µØÖ·**/
-    public static final String XMPPSERVER="172.88.88.43";
+    public static final String XMPPSERVER="120.25.241.28";
     
 }
