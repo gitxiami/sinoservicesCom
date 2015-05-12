@@ -243,6 +243,6 @@
         <!-- 在高德地图功能应用的API Key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="1bdbc532e123dfc151889fa183815c28" />
+            android:value="1a47e4df11a3522a51ac686f7eef433c" />
     </application>
 </manifest>
